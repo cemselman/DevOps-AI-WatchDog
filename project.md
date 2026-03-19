@@ -34,6 +34,7 @@ When the system runs, it:
 - `main.py`: orchestration layer
 - `config.py`: environment settings and runtime configuration
 - `llm_client.py`: shared OpenAI client wrapper
+- `.env.example`: sample environment variable template
 - `agents/`: specialized agent modules
 - `tools/`: data collection and allowlisted action layer
 - `reports/`: generated outputs
@@ -57,6 +58,32 @@ The project generates two output formats:
 
 - Markdown report: readable summary for operators
 - JSON report: structured output for integrations and automation
+
+### Installation
+
+Requirements:
+
+- Python 3.12 or newer
+- Linux environment
+- OpenAI API key
+
+### Environment setup
+
+New users should copy `.env.example` to `.env` and fill in at least the OpenAI API key.
+
+Example:
+
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4.1-mini
+AUTO_APPROVE_LOW_RISK=false
+MONITORED_SERVICES=nginx,docker,ssh
+DISK_USAGE_WARNING_PERCENT=85
+HEALTH_LOG_LINE_COUNT=20
+SECURITY_LOG_LINE_COUNT=30
+LOGIN_HISTORY_COUNT=10
+COMMAND_TIMEOUT_SECONDS=30
+```
 
 ### Summary
 
@@ -94,6 +121,7 @@ Sistem calistiginda:
 - `main.py`: orkestrasyon katmani
 - `config.py`: ortam ayarlari ve konfigurasyon
 - `llm_client.py`: OpenAI istemci sarmalayicisi
+- `.env.example`: ortam degiskenleri icin ornek sablon
 - `agents/`: uzman agent modulleri
 - `tools/`: veri toplama ve allowlisted aksiyon katmani
 - `reports/`: uretilen ciktilar
@@ -120,6 +148,32 @@ Proje iki farkli cikti uretir:
 
 - Markdown rapor: insan tarafinda kolay okunabilir ozet
 - JSON rapor: sistemler ve entegrasyonlar icin yapilandirilmis veri
+
+### Kurulum
+
+Gereksinimler:
+
+- Python 3.12 veya daha yeni
+- Linux ortami
+- OpenAI API key
+
+### Ortam Kurulumu
+
+Projeyi yeni kuran kisi `.env.example` dosyasini `.env` olarak kopyalamali ve en azindan OpenAI API key degerini doldurmalidir.
+
+Ornek:
+
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4.1-mini
+AUTO_APPROVE_LOW_RISK=false
+MONITORED_SERVICES=nginx,docker,ssh
+DISK_USAGE_WARNING_PERCENT=85
+HEALTH_LOG_LINE_COUNT=20
+SECURITY_LOG_LINE_COUNT=30
+LOGIN_HISTORY_COUNT=10
+COMMAND_TIMEOUT_SECONDS=30
+```
 
 ### Ozet
 
