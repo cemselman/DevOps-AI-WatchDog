@@ -1,0 +1,1419 @@
+{
+  "generated_at_utc": "2026-03-18T17:23:05.769362+00:00",
+  "project": "DevOps Watchdog",
+  "agents": {
+    "system_health": {
+      "name": "SystemHealthAgent",
+      "role": "system_health",
+      "report": {
+        "role": "system_health",
+        "snapshot": {
+          "disk": {
+            "command": "df -h /",
+            "stdout": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/vda1        33G   28G  5.1G  85% /",
+            "stderr": "",
+            "exit_code": 0,
+            "root_filesystem_line": "/dev/vda1        33G   28G  5.1G  85% /"
+          },
+          "disk_io": {
+            "command": "iostat -xz 1 1",
+            "stdout": "Linux 6.8.0-101-generic (onboard21) \t03/18/26 \t_x86_64_\t(2 CPU)\n\navg-cpu:  %user   %nice %system %iowait  %steal   %idle\n           2.19    0.01    1.03    0.03    0.11   96.62\n\nDevice            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util\nloop0            0.00      0.00     0.00   0.00    0.00     1.27    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00\nvda              0.25      4.73     0.07  22.03    0.44    19.01    2.78     26.15     0.92  24.91    1.69     9.40    0.02     26.41     0.00   0.00    0.16  1087.28    0.15    1.05    0.00   0.09\nvdb              0.00      0.00     0.00   0.00    0.11     3.83    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "memory": {
+            "command": "free -m",
+            "stdout": "total        used        free      shared  buff/cache   available\nMem:            3915        1867         177          48        2209        2048\nSwap:              0           0           0",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "uptime": "17:21:57 up 14 days,  2:39,  4 users,  load average: 0.03, 0.08, 0.13",
+          "services": {
+            "nginx": {
+              "command": "systemctl status nginx --no-pager",
+              "stdout": "○ nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: enabled)\n     Active: inactive (dead)\n       Docs: man:nginx(8)",
+              "stderr": "",
+              "exit_code": 3,
+              "service": "nginx",
+              "allowed": true
+            },
+            "docker": {
+              "command": "systemctl status docker --no-pager",
+              "stdout": "● docker.service - Docker Application Container Engine\n     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)\n     Active: active (running) since Wed 2026-03-04 14:42:44 UTC; 2 weeks 0 days ago\nTriggeredBy: ● docker.socket\n       Docs: https://docs.docker.com\n   Main PID: 1205 (dockerd)\n      Tasks: 79\n     Memory: 130.0M (peak: 1020.4M)\n        CPU: 1h 3min 41.611s\n     CGroup: /system.slice/docker.service\n             ├─   1205 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock\n             ├─   1840 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 6379 -container-ip 172.19.0.2 -container-port 6379 -use-listen-fd\n             ├─  17987 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 80 -container-ip 172.19.0.4 -container-port 80 -use-listen-fd\n             ├─  17992 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 80 -container-ip 172.19.0.4 -container-port 80 -use-listen-fd\n             ├─  18000 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 443 -container-ip 172.19.0.4 -container-port 443 -use-listen-fd\n             ├─  18006 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 443 -container-ip 172.19.0.4 -container-port 443 -use-listen-fd\n             ├─2875141 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8000 -container-ip 172.20.0.4 -container-port 8000 -use-listen-fd\n             ├─2875148 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8000 -container-ip 172.20.0.4 -container-port 8000 -use-listen-fd\n             ├─3275303 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8005 -container-ip 172.21.0.5 -container-port 8001 -use-listen-fd\n             └─3275308 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8005 -container-ip 172.21.0.5 -container-port 8001 -use-listen-fd\n\nWarning: some journal files were not opened due to insufficient permissions.",
+              "stderr": "",
+              "exit_code": 0,
+              "service": "docker",
+              "allowed": true
+            },
+            "ssh": {
+              "command": "systemctl status ssh --no-pager",
+              "stdout": "● ssh.service - OpenBSD Secure Shell server\n     Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: enabled)\n     Active: active (running) since Fri 2026-03-13 06:05:19 UTC; 5 days ago\nTriggeredBy: ● ssh.socket\n       Docs: man:sshd(8)\n             man:sshd_config(5)\n    Process: 3401978 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)\n   Main PID: 3401980 (sshd)\n      Tasks: 3 (limit: 4655)\n     Memory: 22.5M (peak: 42.8M)\n        CPU: 22min 20.638s\n     CGroup: /system.slice/ssh.service\n             ├─1388413 \"sshd: unknown [priv]\"\n             ├─1388421 \"sshd: unknown [net]\"\n             └─3401980 \"sshd: /usr/sbin/sshd -D [listener] 1 of 10-100 startups\"\n\nWarning: some journal files were not opened due to insufficient permissions.",
+              "stderr": "",
+              "exit_code": 0,
+              "service": "ssh",
+              "allowed": true
+            }
+          },
+          "failed_services": {
+            "command": "systemctl --failed --no-pager --no-legend",
+            "stdout": "",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "docker_health": {
+            "containers": {
+              "command": "docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.RunningFor}}\t{{.Image}}'",
+              "stdout": "",
+              "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+              "exit_code": 1
+            },
+            "stats": {
+              "command": "docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}'",
+              "stdout": "",
+              "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+              "exit_code": 1
+            }
+          },
+          "network_health": {
+            "interfaces": {
+              "command": "ip -brief address",
+              "stdout": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neth0             UP             174.138.14.66/20 10.18.0.7/16 fe80::f036:37ff:feba:e861/64 \neth1             UP             10.110.0.4/20 fe80::ecc4:aaff:fe4f:ef9f/64 \nbr-c728bf0249ab  DOWN           172.18.0.1/16 \ndocker0          DOWN           172.17.0.1/16 fe80::14aa:49ff:fe71:cef/64 \nbr-a30077fc3f07  UP             172.19.0.1/16 fe80::f092:67ff:fec5:6a65/64 \nveth98488e7@if2  UP             fe80::7482:faff:fe5e:34fb/64 \nveth2f2ad8a@if2  UP             fe80::8c4a:43ff:febb:48df/64 \nbr-d852a7736fe6  UP             172.21.0.1/16 fe80::784b:edff:feef:d2c5/64 \nvethb6c9a63@if2  UP             fe80::f081:81ff:feff:3959/64 \nveth29aac87@if2  UP             fe80::d8de:b0ff:fe9e:e8e/64 \nveth3b04dd2@if2  UP             fe80::4416:32ff:febd:acff/64 \nvethdbe2045@if2  UP             fe80::7c54:68ff:fe47:63ed/64 \nveth6695772@if2  UP             fe80::d4f7:b7ff:fef9:4a51/64 \nveth8438546@if2  UP             fe80::78aa:40ff:feb4:a501/64 \nvethc335e41@if2  UP             fe80::a434:31ff:fe90:a655/64 \nveth4196658@if2  UP             fe80::10f0:acff:feec:434/64 \nbr-d6149ae0ab47  UP             172.20.0.1/16 fe80::d81a:97ff:fe54:28f7/64 \nveth5601011@if2  UP             fe80::1448:d4ff:fe5c:da16/64 \nvetha35daee@if2  UP             fe80::a463:2eff:fe8f:3e34/64 \nvethe09371f@if2  UP             fe80::f098:b7ff:fe20:e90f/64 \nvethc3f7f8d@if2  UP             fe80::601e:5cff:feb3:689d/64",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "routes": {
+              "command": "ip route",
+              "stdout": "default via 174.138.0.1 dev eth0 proto static \n10.18.0.0/16 dev eth0 proto kernel scope link src 10.18.0.7 \n10.110.0.0/20 dev eth1 proto kernel scope link src 10.110.0.4 \n172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown \n172.18.0.0/16 dev br-c728bf0249ab proto kernel scope link src 172.18.0.1 linkdown \n172.19.0.0/16 dev br-a30077fc3f07 proto kernel scope link src 172.19.0.1 \n172.20.0.0/16 dev br-d6149ae0ab47 proto kernel scope link src 172.20.0.1 \n172.21.0.0/16 dev br-d852a7736fe6 proto kernel scope link src 172.21.0.1 \n174.138.0.0/20 dev eth0 proto kernel scope link src 174.138.14.66",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "kernel_errors": {
+            "command": "journalctl -k -p err -n 20 --no-pager",
+            "stdout": "-- No entries --",
+            "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+            "exit_code": 0
+          },
+          "log_rotation_health": {
+            "service": {
+              "command": "systemctl status logrotate.service --no-pager",
+              "stdout": "○ logrotate.service - Rotate log files\n     Loaded: loaded (/usr/lib/systemd/system/logrotate.service; static)\n     Active: inactive (dead) since Wed 2026-03-18 00:00:13 UTC; 17h ago\nTriggeredBy: ● logrotate.timer\n       Docs: man:logrotate(8)\n             man:logrotate.conf(5)\n    Process: 1118576 ExecStart=/usr/sbin/logrotate /etc/logrotate.conf (code=exited, status=0/SUCCESS)\n   Main PID: 1118576 (code=exited, status=0/SUCCESS)\n        CPU: 158ms",
+              "stderr": "",
+              "exit_code": 3
+            },
+            "timer": {
+              "command": "systemctl status logrotate.timer --no-pager",
+              "stdout": "● logrotate.timer - Daily rotation of log files\n     Loaded: loaded (/usr/lib/systemd/system/logrotate.timer; enabled; preset: enabled)\n     Active: active (waiting) since Wed 2026-03-04 14:42:35 UTC; 2 weeks 0 days ago\n    Trigger: Thu 2026-03-19 00:00:00 UTC; 6h left\n   Triggers: ● logrotate.service\n       Docs: man:logrotate(8)\n             man:logrotate.conf(5)\n\nWarning: some journal files were not opened due to insufficient permissions.",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "nginx": {
+            "service_status": {
+              "command": "systemctl status nginx --no-pager",
+              "stdout": "○ nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: enabled)\n     Active: inactive (dead)\n       Docs: man:nginx(8)",
+              "stderr": "",
+              "exit_code": 3,
+              "service": "nginx",
+              "allowed": true
+            },
+            "logs": {
+              "command": "journalctl -u nginx.service -n 20 --no-pager",
+              "stdout": "-- No entries --",
+              "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+              "exit_code": 0
+            }
+          },
+          "recent_logs": {
+            "command": "journalctl -n 20 --no-pager --output short",
+            "stdout": "Mar 18 15:29:35 onboard21 systemd[1341697]: Created slice app.slice - User Application Slice.\nMar 18 15:29:35 onboard21 systemd[1341697]: Started launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target paths.target - Paths.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target timers.target - Timers.\nMar 18 15:29:35 onboard21 systemd[1341697]: Starting dbus.socket - D-Bus User Message Bus Socket...\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on dirmngr.socket - GnuPG network certificate management daemon.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).\nMar 18 15:29:35 onboard21 systemd[1341697]: Starting gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on keyboxd.socket - GnuPG public key management service.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on pk-debconf-helper.socket - debconf communication socket.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on snapd.session-agent.socket - REST API socket for snapd user session agent.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on dbus.socket - D-Bus User Message Bus Socket.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target sockets.target - Sockets.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target basic.target - Basic System.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target default.target - Main User Target.\nMar 18 15:29:35 onboard21 systemd[1341697]: Startup finished in 354ms.\nMar 18 15:34:45 onboard21 systemd[1341697]: launchpadlib-cache-clean.service - Clean up old files in the Launchpadlib cache was skipped because of an unmet condition check (ConditionPathExists=/home/aiagentmulti/.launchpadlib/api.launchpad.net/cache).",
+            "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+            "exit_code": 0
+          }
+        },
+        "details": {
+          "disk": {
+            "command": "df -h /",
+            "stdout": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/vda1        33G   28G  5.1G  85% /",
+            "stderr": "",
+            "exit_code": 0,
+            "root_filesystem_line": "/dev/vda1        33G   28G  5.1G  85% /"
+          },
+          "disk_io": {
+            "command": "iostat -xz 1 1",
+            "stdout": "Linux 6.8.0-101-generic (onboard21) \t03/18/26 \t_x86_64_\t(2 CPU)\n\navg-cpu:  %user   %nice %system %iowait  %steal   %idle\n           2.19    0.01    1.03    0.03    0.11   96.62\n\nDevice            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util\nloop0            0.00      0.00     0.00   0.00    0.00     1.27    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00\nvda              0.25      4.73     0.07  22.03    0.44    19.01    2.78     26.15     0.92  24.91    1.69     9.40    0.02     26.41     0.00   0.00    0.16  1087.28    0.15    1.05    0.00   0.09\nvdb              0.00      0.00     0.00   0.00    0.11     3.83    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "memory": {
+            "command": "free -m",
+            "stdout": "total        used        free      shared  buff/cache   available\nMem:            3915        1867         177          48        2209        2048\nSwap:              0           0           0",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "uptime": "17:21:57 up 14 days,  2:39,  4 users,  load average: 0.03, 0.08, 0.13",
+          "swap": {
+            "free": {
+              "command": "free -m",
+              "stdout": "total        used        free      shared  buff/cache   available\nMem:            3915        1877         168          48        2209        2038\nSwap:              0           0           0",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "swapon": {
+              "command": "swapon --show",
+              "stdout": "",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "inode": {
+            "command": "df -i /",
+            "stdout": "Filesystem      Inodes   IUsed   IFree IUse% Mounted on\n/dev/vda1      4456448 1012200 3444248   23% /",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "root_sizes": {
+            "command": "du -xh --max-depth=1 /",
+            "stdout": "3.1M\t/projectmedia\n4.0K\t/bin.usr-is-merged\n6.6M\t/etc\n8.0K\t/snap\n4.0K\t/sbin.usr-is-merged\n4.0K\t/projectdata\n4.0K\t/mnt\n3.0G\t/var\n27M\t/opt\n393M\t/home\n2.6G\t/usr\n4.0K\t/media\n196K\t/tmp\n4.0K\t/lib.usr-is-merged\n4.0K\t/srv\n4.0K\t/root\n16K\t/lost+found\n6.0G\t/",
+            "stderr": "du: cannot read directory '/etc/credstore.encrypted': Permission denied\ndu: cannot read directory '/etc/multipath': Permission denied\ndu: cannot read directory '/etc/sudoers.d': Permission denied\ndu: cannot read directory '/etc/ssl/private': Permission denied\ndu: cannot read directory '/etc/polkit-1/rules.d': Permission denied\ndu: cannot read directory '/etc/credstore': Permission denied\ndu: cannot read directory '/etc/letsencrypt/archive': Permission denied\ndu: cannot read directory '/etc/letsencrypt/live': Permission denied\ndu: cannot read directory '/etc/letsencrypt/accounts': Permission denied\ndu: cannot read directory '/etc/cni/net.d': Permission denied\ndu: cannot read directory '/projectdata': Permission denied\ndu: cannot read directory '/var/log/unattended-upgrades': Permission denied\ndu: cannot read directory '/var/log/letsencrypt': Permission denied\ndu: cannot read directory '/var/log/private': Permission denied\ndu: cannot read directory '/var/lib/ubuntu-advantage/apt-esm/var/lib/apt/lists/partial': Permission denied\ndu: cannot read directory '/var/lib/fwupd/gnupg': Permission denied\ndu: cannot read directory '/var/lib/polkit-1': Permission denied\ndu: cannot read directory '/var/lib/apt/lists/partial': Permission denied\ndu: cannot read directory '/var/lib/snapd/cookie': Permission denied\ndu: cannot read directory '/var/lib/snapd/void': Permission denied\ndu: cannot read directory '/var/lib/containerd': Permission denied\ndu: cannot read directory '/var/lib/update-notifier/package-data-downloads/partial': Permission denied\ndu: cannot read directory '/var/lib/udisks2': Permission denied\ndu: cannot read directory '/var/lib/nginx/body': Permission denied\ndu: cannot read directory '/var/lib/nginx/uwsgi': Permission denied\ndu: cannot read directory '/var/lib/nginx/fastcgi': Permission denied\ndu: cannot read directory '/var/lib/nginx/scgi': Permission denied\ndu: cannot read directory '/var/lib/nginx/proxy': Permission denied\ndu: cannot read directory '/var/lib/private': Permission denied\ndu: cannot read directory '/var/lib/docker': Permission denied\ndu: cannot read directory '/var/cache/apparmor/2693c843.0': Permission denied\ndu: cannot read directory '/var/cache/apt/archives/partial': Permission denied\ndu: cannot read directory '/var/cache/ldconfig': Permission denied\ndu: cannot read directory '/var/cache/pollinate': Permission denied\ndu: cannot read directory '/var/cache/private': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-eKnvWP': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-HVrK5B': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-BuwDeZ': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-yqgigv': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-2BgD6t': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-7Aj14W': Permission denied\ndu: cannot read directory '/var/spool/rsyslog': Permission denied\ndu: cannot read directory '/var/spool/cron/crontabs': Permission denied\ndu: cannot read directory '/opt/containerd': Permission denied\ndu: cannot read directory '/home/appmaster': Permission denied\ndu: cannot read directory '/home/aimaster': Permission denied\ndu: cannot read directory '/home/reactmaster': Permission denied\ndu: cannot read directory '/home/agenticaipure': Permission denied\ndu: cannot read directory '/home/aiagent': Permission denied\ndu: cannot read directory '/home/agenticai': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-XQoaek': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-7A0FEi': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-Li8837': Permission denied\ndu: cannot read directory '/tmp/snap-private-tmp': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-XNUR0W': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-fuAPL6': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-zeAZI8': Permission denied\ndu: cannot read directory '/root': Permission denied\ndu: cannot read directory '/lost+found': Permission denied",
+            "exit_code": 1
+          },
+          "var_log_sizes": {
+            "command": "du -xh --max-depth=1 /var/log",
+            "stdout": "132K\t/var/log/apt\n4.0K\t/var/log/unattended-upgrades\n4.0K\t/var/log/letsencrypt\n316K\t/var/log/nginx\n4.0K\t/var/log/dist-upgrade\n2.1G\t/var/log/journal\n4.0K\t/var/log/private\n13M\t/var/log/sysstat\n4.0K\t/var/log/landscape\n2.5G\t/var/log",
+            "stderr": "du: cannot read directory '/var/log/unattended-upgrades': Permission denied\ndu: cannot read directory '/var/log/letsencrypt': Permission denied\ndu: cannot read directory '/var/log/private': Permission denied",
+            "exit_code": 1
+          },
+          "failed_services": {
+            "command": "systemctl --failed --no-pager --no-legend",
+            "stdout": "",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "docker_health": {
+            "containers": {
+              "command": "docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.RunningFor}}\t{{.Image}}'",
+              "stdout": "",
+              "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+              "exit_code": 1
+            },
+            "stats": {
+              "command": "docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}'",
+              "stdout": "",
+              "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+              "exit_code": 1
+            }
+          },
+          "network_health": {
+            "interfaces": {
+              "command": "ip -brief address",
+              "stdout": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neth0             UP             174.138.14.66/20 10.18.0.7/16 fe80::f036:37ff:feba:e861/64 \neth1             UP             10.110.0.4/20 fe80::ecc4:aaff:fe4f:ef9f/64 \nbr-c728bf0249ab  DOWN           172.18.0.1/16 \ndocker0          DOWN           172.17.0.1/16 fe80::14aa:49ff:fe71:cef/64 \nbr-a30077fc3f07  UP             172.19.0.1/16 fe80::f092:67ff:fec5:6a65/64 \nveth98488e7@if2  UP             fe80::7482:faff:fe5e:34fb/64 \nveth2f2ad8a@if2  UP             fe80::8c4a:43ff:febb:48df/64 \nbr-d852a7736fe6  UP             172.21.0.1/16 fe80::784b:edff:feef:d2c5/64 \nvethb6c9a63@if2  UP             fe80::f081:81ff:feff:3959/64 \nveth29aac87@if2  UP             fe80::d8de:b0ff:fe9e:e8e/64 \nveth3b04dd2@if2  UP             fe80::4416:32ff:febd:acff/64 \nvethdbe2045@if2  UP             fe80::7c54:68ff:fe47:63ed/64 \nveth6695772@if2  UP             fe80::d4f7:b7ff:fef9:4a51/64 \nveth8438546@if2  UP             fe80::78aa:40ff:feb4:a501/64 \nvethc335e41@if2  UP             fe80::a434:31ff:fe90:a655/64 \nveth4196658@if2  UP             fe80::10f0:acff:feec:434/64 \nbr-d6149ae0ab47  UP             172.20.0.1/16 fe80::d81a:97ff:fe54:28f7/64 \nveth5601011@if2  UP             fe80::1448:d4ff:fe5c:da16/64 \nvetha35daee@if2  UP             fe80::a463:2eff:fe8f:3e34/64 \nvethe09371f@if2  UP             fe80::f098:b7ff:fe20:e90f/64 \nvethc3f7f8d@if2  UP             fe80::601e:5cff:feb3:689d/64",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "routes": {
+              "command": "ip route",
+              "stdout": "default via 174.138.0.1 dev eth0 proto static \n10.18.0.0/16 dev eth0 proto kernel scope link src 10.18.0.7 \n10.110.0.0/20 dev eth1 proto kernel scope link src 10.110.0.4 \n172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown \n172.18.0.0/16 dev br-c728bf0249ab proto kernel scope link src 172.18.0.1 linkdown \n172.19.0.0/16 dev br-a30077fc3f07 proto kernel scope link src 172.19.0.1 \n172.20.0.0/16 dev br-d6149ae0ab47 proto kernel scope link src 172.20.0.1 \n172.21.0.0/16 dev br-d852a7736fe6 proto kernel scope link src 172.21.0.1 \n174.138.0.0/20 dev eth0 proto kernel scope link src 174.138.14.66",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "kernel_errors": {
+            "command": "journalctl -k -p err -n 20 --no-pager",
+            "stdout": "-- No entries --",
+            "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+            "exit_code": 0
+          },
+          "log_rotation_health": {
+            "service": {
+              "command": "systemctl status logrotate.service --no-pager",
+              "stdout": "○ logrotate.service - Rotate log files\n     Loaded: loaded (/usr/lib/systemd/system/logrotate.service; static)\n     Active: inactive (dead) since Wed 2026-03-18 00:00:13 UTC; 17h ago\nTriggeredBy: ● logrotate.timer\n       Docs: man:logrotate(8)\n             man:logrotate.conf(5)\n    Process: 1118576 ExecStart=/usr/sbin/logrotate /etc/logrotate.conf (code=exited, status=0/SUCCESS)\n   Main PID: 1118576 (code=exited, status=0/SUCCESS)\n        CPU: 158ms",
+              "stderr": "",
+              "exit_code": 3
+            },
+            "timer": {
+              "command": "systemctl status logrotate.timer --no-pager",
+              "stdout": "● logrotate.timer - Daily rotation of log files\n     Loaded: loaded (/usr/lib/systemd/system/logrotate.timer; enabled; preset: enabled)\n     Active: active (waiting) since Wed 2026-03-04 14:42:35 UTC; 2 weeks 0 days ago\n    Trigger: Thu 2026-03-19 00:00:00 UTC; 6h left\n   Triggers: ● logrotate.service\n       Docs: man:logrotate(8)\n             man:logrotate.conf(5)\n\nWarning: some journal files were not opened due to insufficient permissions.",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "nginx": {
+            "service_status": {
+              "command": "systemctl status nginx --no-pager",
+              "stdout": "○ nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: enabled)\n     Active: inactive (dead)\n       Docs: man:nginx(8)",
+              "stderr": "",
+              "exit_code": 3,
+              "service": "nginx",
+              "allowed": true
+            },
+            "logs": {
+              "command": "journalctl -u nginx.service -n 20 --no-pager",
+              "stdout": "-- No entries --",
+              "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+              "exit_code": 0
+            }
+          },
+          "recent_logs": {
+            "command": "journalctl -n 20 --no-pager --output short",
+            "stdout": "Mar 18 15:29:35 onboard21 systemd[1341697]: Created slice app.slice - User Application Slice.\nMar 18 15:29:35 onboard21 systemd[1341697]: Started launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target paths.target - Paths.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target timers.target - Timers.\nMar 18 15:29:35 onboard21 systemd[1341697]: Starting dbus.socket - D-Bus User Message Bus Socket...\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on dirmngr.socket - GnuPG network certificate management daemon.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).\nMar 18 15:29:35 onboard21 systemd[1341697]: Starting gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on keyboxd.socket - GnuPG public key management service.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on pk-debconf-helper.socket - debconf communication socket.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on snapd.session-agent.socket - REST API socket for snapd user session agent.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on dbus.socket - D-Bus User Message Bus Socket.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target sockets.target - Sockets.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target basic.target - Basic System.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target default.target - Main User Target.\nMar 18 15:29:35 onboard21 systemd[1341697]: Startup finished in 354ms.\nMar 18 15:34:45 onboard21 systemd[1341697]: launchpadlib-cache-clean.service - Clean up old files in the Launchpadlib cache was skipped because of an unmet condition check (ConditionPathExists=/home/aiagentmulti/.launchpadlib/api.launchpad.net/cache).",
+            "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+            "exit_code": 0
+          },
+          "services": {
+            "nginx": {
+              "command": "systemctl status nginx --no-pager",
+              "stdout": "○ nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: enabled)\n     Active: inactive (dead)\n       Docs: man:nginx(8)",
+              "stderr": "",
+              "exit_code": 3,
+              "service": "nginx",
+              "allowed": true
+            },
+            "docker": {
+              "command": "systemctl status docker --no-pager",
+              "stdout": "● docker.service - Docker Application Container Engine\n     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)\n     Active: active (running) since Wed 2026-03-04 14:42:44 UTC; 2 weeks 0 days ago\nTriggeredBy: ● docker.socket\n       Docs: https://docs.docker.com\n   Main PID: 1205 (dockerd)\n      Tasks: 79\n     Memory: 130.0M (peak: 1020.4M)\n        CPU: 1h 3min 41.611s\n     CGroup: /system.slice/docker.service\n             ├─   1205 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock\n             ├─   1840 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 6379 -container-ip 172.19.0.2 -container-port 6379 -use-listen-fd\n             ├─  17987 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 80 -container-ip 172.19.0.4 -container-port 80 -use-listen-fd\n             ├─  17992 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 80 -container-ip 172.19.0.4 -container-port 80 -use-listen-fd\n             ├─  18000 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 443 -container-ip 172.19.0.4 -container-port 443 -use-listen-fd\n             ├─  18006 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 443 -container-ip 172.19.0.4 -container-port 443 -use-listen-fd\n             ├─2875141 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8000 -container-ip 172.20.0.4 -container-port 8000 -use-listen-fd\n             ├─2875148 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8000 -container-ip 172.20.0.4 -container-port 8000 -use-listen-fd\n             ├─3275303 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8005 -container-ip 172.21.0.5 -container-port 8001 -use-listen-fd\n             └─3275308 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8005 -container-ip 172.21.0.5 -container-port 8001 -use-listen-fd\n\nWarning: some journal files were not opened due to insufficient permissions.",
+              "stderr": "",
+              "exit_code": 0,
+              "service": "docker",
+              "allowed": true
+            },
+            "ssh": {
+              "command": "systemctl status ssh --no-pager",
+              "stdout": "● ssh.service - OpenBSD Secure Shell server\n     Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: enabled)\n     Active: active (running) since Fri 2026-03-13 06:05:19 UTC; 5 days ago\nTriggeredBy: ● ssh.socket\n       Docs: man:sshd(8)\n             man:sshd_config(5)\n    Process: 3401978 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)\n   Main PID: 3401980 (sshd)\n      Tasks: 3 (limit: 4655)\n     Memory: 22.5M (peak: 42.8M)\n        CPU: 22min 20.638s\n     CGroup: /system.slice/ssh.service\n             ├─1388413 \"sshd: unknown [priv]\"\n             ├─1388421 \"sshd: unknown [net]\"\n             └─3401980 \"sshd: /usr/sbin/sshd -D [listener] 1 of 10-100 startups\"\n\nWarning: some journal files were not opened due to insufficient permissions.",
+              "stderr": "",
+              "exit_code": 0,
+              "service": "ssh",
+              "allowed": true
+            }
+          }
+        },
+        "message": "Linux Server Health Report\n==========================\n\n1. Executive summary\n--------------------\nThe server is generally stable with low CPU load and no kernel errors. Memory and disk input/output are operating normally, and the key services Docker and SSH are up and running smoothly. However, root filesystem disk usage is relatively high at 85%, and the NGINX web server service is inactive. Docker container details cannot be retrieved due to permission issues. Logrotate service ran successfully but is currently inactive, relying on the timer.\n\n2. Healthy signals\n------------------\n- CPU load averages are very low: 0.03 (1min), 0.08 (5min), 0.13 (15min).\n- Memory has 2GB available out of 3.9GB total, with no swap in use.\n- Disk IO utilization on main device (vda) is minimal (0.09% use).\n- No kernel errors detected in recent logs.\n- Docker service is active and running for over 2 weeks without interruption.\n- SSH service is active and running for 5 days.\n- Network interfaces eth0 and eth1 are UP and configured with valid IPs.\n- Logrotate last ran successfully with exit status 0; the timer is enabled and active.\n\n3. Risky signals\n----------------\n- Root filesystem usage is at 85% capacity (28GB used of 33GB); risk of running out of space if growth continues.\n- NGINX service is inactive (dead) and disabled; no recent logs available explaining the cause.\n- Docker container listing and stats commands fail due to permission denied on the Docker socket, preventing monitoring of container health.\n- Multiple permission denied errors when attempting detailed disk usage in /, limiting insight into large directories.\n- Several Docker-related network bridges/interfaces are DOWN, which may impact container networking.\n- Log directories (/var/log/unattended-upgrades, /var/log/letsencrypt, /var/log/private) show permission denied, limiting log visibility.\n\n4. Recommended low-risk actions\n-------------------------------\n- Monitor disk space usage and clean up or expand root filesystem to keep usage below ~80%.\n- Investigate why the NGINX service is disabled and not running; enable and start if required.\n- Review Docker socket permissions or run docker commands with sufficient privileges to gain visibility into running containers and resource usage.\n- Check and adjust permissions for critical log directories and Docker directories to enable better monitoring and troubleshooting.\n- Verify the status of Docker bridge interfaces currently DOWN; restart or reconfigure if they affect active containers.\n\n5. Items that need manual review\n-------------------------------\n- Root cause for NGINX being inactive despite being enabled by preset (suggest checking config, errors, and dependencies).\n- Assess why multiple permission denials occur for important directories and services; investigate potential security policy restrictions or ownership issues.\n- Confirm if disabled Docker network bridges are expected or symptomatic of container/network misconfiguration.\n- Plan for disk usage growth in root filesystem considering current 85% utilization and large /var/log journal (2.1GB) and /var/log total 2.5GB usage.\n- Review Docker service logs and container runtime states once permissions issues are resolved.\n\nSummary: The server is mostly healthy in CPU, memory, and critical services Docker and SSH. Attention is needed for disk space pressure, NGINX service inactivity, Docker monitoring permissions, and restricted log access. These should be addressed to prevent service disruption and maintain operational visibility."
+      }
+    },
+    "security_review": {
+      "name": "SecurityReviewAgent",
+      "role": "security_review",
+      "report": {
+        "role": "security_review",
+        "snapshot": {
+          "active_sessions": {
+            "command": "who",
+            "stdout": "root     pts/0        2026-03-18 15:30 (185.43.231.253)",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "recent_logins": {
+            "command": "last -n 10",
+            "stdout": "root     pts/0        185.43.231.253   Wed Mar 18 15:30   still logged in\nroot     pts/0        185.43.231.253   Tue Mar 17 21:19 - 23:44  (02:25)\nroot     pts/0        185.43.231.253   Mon Mar 16 15:33 - 01:27  (09:54)\nroot     pts/3        185.43.229.238   Sat Mar 14 23:23 - 02:47  (03:24)\nroot     pts/2        185.43.229.238   Sat Mar 14 23:20 - 01:34  (02:13)\nroot     pts/1        185.43.229.238   Sat Mar 14 21:47 - 00:29  (02:42)\nroot     pts/0        185.43.231.253   Sat Mar 14 15:47 - 23:35  (07:47)\nroot     pts/0        185.43.231.253   Fri Mar 13 21:15 - 01:18  (04:02)\nroot     pts/0        185.43.231.253   Thu Mar 12 21:31 - 01:50  (04:19)\nroot     pts/0        185.43.231.253   Wed Mar 11 18:42 - 01:17  (06:34)\n\nwtmp begins Fri Dec 26 23:42:18 2025",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "failed_logins": {
+            "command": "lastb -n 10",
+            "stdout": "",
+            "stderr": "lastb: cannot open /var/log/btmp: Permission denied",
+            "exit_code": 1
+          },
+          "open_ports": {
+            "command": "ss -tuln",
+            "stdout": "Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess\nudp   UNCONN 0      0         127.0.0.54:53         0.0.0.0:*          \nudp   UNCONN 0      0      127.0.0.53%lo:53         0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:80         0.0.0.0:*          \ntcp   LISTEN 0      4096       127.0.0.1:6379       0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:22         0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:443        0.0.0.0:*          \ntcp   LISTEN 0      511        127.0.0.1:40139      0.0.0.0:*          \ntcp   LISTEN 0      4096       127.0.0.1:46467      0.0.0.0:*          \ntcp   LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*          \ntcp   LISTEN 0      511        127.0.0.1:38833      0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:8005       0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:8000       0.0.0.0:*          \ntcp   LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*          \ntcp   LISTEN 0      2048       127.0.0.1:8011       0.0.0.0:*          \ntcp   LISTEN 0      2048       127.0.0.1:8001       0.0.0.0:*          \ntcp   LISTEN 0      128        127.0.0.1:6010       0.0.0.0:*          \ntcp   LISTEN 0      4096            [::]:80            [::]:*          \ntcp   LISTEN 0      4096            [::]:22            [::]:*          \ntcp   LISTEN 0      4096            [::]:443           [::]:*          \ntcp   LISTEN 0      128            [::1]:6010          [::]:*          \ntcp   LISTEN 0      4096            [::]:8005          [::]:*          \ntcp   LISTEN 0      4096            [::]:8000          [::]:*",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "firewall_status": {
+            "command": "ufw status",
+            "stdout": "",
+            "stderr": "ERROR: You need to be root to run this script",
+            "exit_code": 1
+          },
+          "ssh_logs": {
+            "command": "journalctl -u ssh.service -n 30 --no-pager",
+            "stdout": "-- No entries --",
+            "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+            "exit_code": 0
+          },
+          "sudo_activity": {
+            "command": "journalctl _COMM=sudo -n 30 --no-pager",
+            "stdout": "-- No entries --",
+            "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+            "exit_code": 0
+          },
+          "ssh_config_audit": {
+            "command": "sshd -T",
+            "stdout": "",
+            "stderr": "/etc/ssh/sshd_config.d/50-cloud-init.conf: Permission denied",
+            "exit_code": 1
+          },
+          "cron_security": {
+            "service": {
+              "command": "systemctl status cron.service --no-pager",
+              "stdout": "● cron.service - Regular background program processing daemon\n     Loaded: loaded (/usr/lib/systemd/system/cron.service; enabled; preset: enabled)\n     Active: active (running) since Wed 2026-03-04 14:42:35 UTC; 2 weeks 0 days ago\n       Docs: man:cron(8)\n   Main PID: 750 (cron)\n      Tasks: 1 (limit: 4655)\n     Memory: 171.6M (peak: 452.6M)\n        CPU: 3min 22.953s\n     CGroup: /system.slice/cron.service\n             └─750 /usr/sbin/cron -f -P\n\nWarning: some journal files were not opened due to insufficient permissions.",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "system_crontab": {
+              "command": "sed -n 1,120p /etc/crontab",
+              "stdout": "# /etc/crontab: system-wide crontab\n# Unlike any other crontab you don't have to run the `crontab'\n# command to install the new version when you edit this file\n# and files in /etc/cron.d. These files also have username fields,\n# that none of the other crontabs do.\n\nSHELL=/bin/sh\n# You can also override PATH, but by default, newer versions inherit it from the environment\n#PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n\n# Example of job definition:\n# .---------------- minute (0 - 59)\n# |  .------------- hour (0 - 23)\n# |  |  .---------- day of month (1 - 31)\n# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...\n# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat\n# |  |  |  |  |\n# *  *  *  *  * user-name command to be executed\n17 *\t* * *\troot\tcd / && run-parts --report /etc/cron.hourly\n25 6\t* * *\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.daily; }\n47 6\t* * 7\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.weekly; }\n52 6\t1 * *\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.monthly; }\n#",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "cron_d": {
+              "command": "ls -la /etc/cron.d",
+              "stdout": "total 24\ndrwxr-xr-x   2 root root 4096 Mar  4 15:02 .\ndrwxr-xr-x 114 root root 4096 Mar 17 06:23 ..\n-rw-r--r--   1 root root  102 Mar 31  2024 .placeholder\n-rw-r--r--   1 root root  802 Apr 16  2023 certbot\n-rw-r--r--   1 root root  201 Apr  8  2024 e2scrub_all\n-rw-r--r--   1 root root  396 Jan  9  2024 sysstat",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "world_writable_files": {
+            "command": "find /tmp /var/tmp /var/www /home -xdev -type f -perm -0002",
+            "stdout": "",
+            "stderr": "find: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-XQoaek’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-7A0FEi’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-Li8837’: Permission denied\nfind: ‘/tmp/snap-private-tmp’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-XNUR0W’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-fuAPL6’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-zeAZI8’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-eKnvWP’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-HVrK5B’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-BuwDeZ’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-yqgigv’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-2BgD6t’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-7Aj14W’: Permission denied\nfind: ‘/home/appmaster’: Permission denied\nfind: ‘/home/aimaster’: Permission denied\nfind: ‘/home/reactmaster’: Permission denied\nfind: ‘/home/agenticaipure’: Permission denied\nfind: ‘/home/aiagent’: Permission denied\nfind: ‘/home/agenticai’: Permission denied",
+            "exit_code": 1
+          },
+          "user_account_audit": {
+            "passwd": {
+              "command": "getent passwd",
+              "stdout": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\ngames:x:5:60:games:/usr/games:/usr/sbin/nologin\nman:x:6:12:man:/var/cache/man:/usr/sbin/nologin\nlp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\nmail:x:8:8:mail:/var/mail:/usr/sbin/nologin\nnews:x:9:9:news:/var/spool/news:/usr/sbin/nologin\nuucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin\nproxy:x:13:13:proxy:/bin:/usr/sbin/nologin\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin\nbackup:x:34:34:backup:/var/backups:/usr/sbin/nologin\nlist:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin\nirc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin\n_apt:x:42:65534::/nonexistent:/usr/sbin/nologin\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\nsystemd-network:x:998:998:systemd Network Management:/:/usr/sbin/nologin\nsystemd-timesync:x:996:996:systemd Time Synchronization:/:/usr/sbin/nologin\ndhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false\nmessagebus:x:101:101::/nonexistent:/usr/sbin/nologin\nsyslog:x:102:102::/nonexistent:/usr/sbin/nologin\nsystemd-resolve:x:991:991:systemd Resolver:/:/usr/sbin/nologin\nuuidd:x:103:103::/run/uuidd:/usr/sbin/nologin\ntss:x:104:104:TPM software stack,,,:/var/lib/tpm:/bin/false\nsshd:x:105:65534::/run/sshd:/usr/sbin/nologin\npollinate:x:106:1::/var/cache/pollinate:/bin/false\ntcpdump:x:107:108::/nonexistent:/usr/sbin/nologin\nlandscape:x:108:109::/var/lib/landscape:/usr/sbin/nologin\nfwupd-refresh:x:990:990:Firmware update daemon:/var/lib/fwupd:/usr/sbin/nologin\npolkitd:x:989:989:User for polkitd:/:/usr/sbin/nologin\ndo-agent:x:999:988::/home/do-agent:/bin/false\nappmaster:x:1000:1000:appmaster,,,:/home/appmaster:/bin/bash\ndnsmasq:x:997:65534:dnsmasq:/var/lib/misc:/usr/sbin/nologin\nreactmaster:x:1001:1001:,,,:/home/reactmaster:/bin/bash\naimaster:x:1002:1002:,,,:/home/aimaster:/bin/bash\nagenticai:x:1003:1003:,,,:/home/agenticai:/bin/bash\naiagent:x:1004:1004:,,,:/home/aiagent:/bin/bash\nagenticaipure:x:1005:1005:,,,:/home/agenticaipure:/bin/bash\naiagentmulti:x:1006:1006:,,,:/home/aiagentmulti:/bin/bash",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "sudo_group": {
+              "command": "getent group sudo",
+              "stdout": "sudo:x:27:appmaster,reactmaster,aimaster,agenticai,aiagent,agenticaipure,aiagentmulti",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "root_group": {
+              "command": "getent group root",
+              "stdout": "root:x:0:",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "fail2ban_status": {
+            "service": {
+              "command": "systemctl status fail2ban.service --no-pager",
+              "stdout": "",
+              "stderr": "Unit fail2ban.service could not be found.",
+              "exit_code": 4
+            },
+            "client": {
+              "command": "fail2ban-client status",
+              "stdout": "",
+              "stderr": "[Errno 2] No such file or directory: 'fail2ban-client'",
+              "exit_code": 127
+            }
+          },
+          "docker_security": {
+            "containers": {
+              "command": "docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}'",
+              "stdout": "",
+              "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+              "exit_code": 1
+            },
+            "security_options": {
+              "command": "docker info --format '{{json .SecurityOptions}}'",
+              "stdout": "null",
+              "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/info\": dial unix /var/run/docker.sock: connect: permission denied",
+              "exit_code": 1
+            },
+            "daemon_socket": {
+              "command": "ls -l /var/run/docker.sock",
+              "stdout": "srw-rw---- 1 root docker 0 Mar  4 14:42 /var/run/docker.sock",
+              "stderr": "",
+              "exit_code": 0
+            }
+          }
+        },
+        "details": {
+          "active_sessions": {
+            "command": "who",
+            "stdout": "root     pts/0        2026-03-18 15:30 (185.43.231.253)",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "recent_logins": {
+            "command": "last -n 10",
+            "stdout": "root     pts/0        185.43.231.253   Wed Mar 18 15:30   still logged in\nroot     pts/0        185.43.231.253   Tue Mar 17 21:19 - 23:44  (02:25)\nroot     pts/0        185.43.231.253   Mon Mar 16 15:33 - 01:27  (09:54)\nroot     pts/3        185.43.229.238   Sat Mar 14 23:23 - 02:47  (03:24)\nroot     pts/2        185.43.229.238   Sat Mar 14 23:20 - 01:34  (02:13)\nroot     pts/1        185.43.229.238   Sat Mar 14 21:47 - 00:29  (02:42)\nroot     pts/0        185.43.231.253   Sat Mar 14 15:47 - 23:35  (07:47)\nroot     pts/0        185.43.231.253   Fri Mar 13 21:15 - 01:18  (04:02)\nroot     pts/0        185.43.231.253   Thu Mar 12 21:31 - 01:50  (04:19)\nroot     pts/0        185.43.231.253   Wed Mar 11 18:42 - 01:17  (06:34)\n\nwtmp begins Fri Dec 26 23:42:18 2025",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "failed_logins": {
+            "command": "lastb -n 10",
+            "stdout": "",
+            "stderr": "lastb: cannot open /var/log/btmp: Permission denied",
+            "exit_code": 1
+          },
+          "open_ports": {
+            "command": "ss -tuln",
+            "stdout": "Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess\nudp   UNCONN 0      0         127.0.0.54:53         0.0.0.0:*          \nudp   UNCONN 0      0      127.0.0.53%lo:53         0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:80         0.0.0.0:*          \ntcp   LISTEN 0      4096       127.0.0.1:6379       0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:22         0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:443        0.0.0.0:*          \ntcp   LISTEN 0      511        127.0.0.1:40139      0.0.0.0:*          \ntcp   LISTEN 0      4096       127.0.0.1:46467      0.0.0.0:*          \ntcp   LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*          \ntcp   LISTEN 0      511        127.0.0.1:38833      0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:8005       0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:8000       0.0.0.0:*          \ntcp   LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*          \ntcp   LISTEN 0      2048       127.0.0.1:8011       0.0.0.0:*          \ntcp   LISTEN 0      2048       127.0.0.1:8001       0.0.0.0:*          \ntcp   LISTEN 0      128        127.0.0.1:6010       0.0.0.0:*          \ntcp   LISTEN 0      4096            [::]:80            [::]:*          \ntcp   LISTEN 0      4096            [::]:22            [::]:*          \ntcp   LISTEN 0      4096            [::]:443           [::]:*          \ntcp   LISTEN 0      128            [::1]:6010          [::]:*          \ntcp   LISTEN 0      4096            [::]:8005          [::]:*          \ntcp   LISTEN 0      4096            [::]:8000          [::]:*",
+            "stderr": "",
+            "exit_code": 0
+          },
+          "firewall_status": {
+            "command": "ufw status",
+            "stdout": "",
+            "stderr": "ERROR: You need to be root to run this script",
+            "exit_code": 1
+          },
+          "ssh_logs": {
+            "command": "journalctl -u ssh.service -n 30 --no-pager",
+            "stdout": "-- No entries --",
+            "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+            "exit_code": 0
+          },
+          "sudo_activity": {
+            "command": "journalctl _COMM=sudo -n 30 --no-pager",
+            "stdout": "-- No entries --",
+            "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+            "exit_code": 0
+          },
+          "ssh_config_audit": {
+            "command": "sshd -T",
+            "stdout": "",
+            "stderr": "/etc/ssh/sshd_config.d/50-cloud-init.conf: Permission denied",
+            "exit_code": 1
+          },
+          "cron_security": {
+            "service": {
+              "command": "systemctl status cron.service --no-pager",
+              "stdout": "● cron.service - Regular background program processing daemon\n     Loaded: loaded (/usr/lib/systemd/system/cron.service; enabled; preset: enabled)\n     Active: active (running) since Wed 2026-03-04 14:42:35 UTC; 2 weeks 0 days ago\n       Docs: man:cron(8)\n   Main PID: 750 (cron)\n      Tasks: 1 (limit: 4655)\n     Memory: 171.6M (peak: 452.6M)\n        CPU: 3min 22.953s\n     CGroup: /system.slice/cron.service\n             └─750 /usr/sbin/cron -f -P\n\nWarning: some journal files were not opened due to insufficient permissions.",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "system_crontab": {
+              "command": "sed -n 1,120p /etc/crontab",
+              "stdout": "# /etc/crontab: system-wide crontab\n# Unlike any other crontab you don't have to run the `crontab'\n# command to install the new version when you edit this file\n# and files in /etc/cron.d. These files also have username fields,\n# that none of the other crontabs do.\n\nSHELL=/bin/sh\n# You can also override PATH, but by default, newer versions inherit it from the environment\n#PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n\n# Example of job definition:\n# .---------------- minute (0 - 59)\n# |  .------------- hour (0 - 23)\n# |  |  .---------- day of month (1 - 31)\n# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...\n# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat\n# |  |  |  |  |\n# *  *  *  *  * user-name command to be executed\n17 *\t* * *\troot\tcd / && run-parts --report /etc/cron.hourly\n25 6\t* * *\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.daily; }\n47 6\t* * 7\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.weekly; }\n52 6\t1 * *\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.monthly; }\n#",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "cron_d": {
+              "command": "ls -la /etc/cron.d",
+              "stdout": "total 24\ndrwxr-xr-x   2 root root 4096 Mar  4 15:02 .\ndrwxr-xr-x 114 root root 4096 Mar 17 06:23 ..\n-rw-r--r--   1 root root  102 Mar 31  2024 .placeholder\n-rw-r--r--   1 root root  802 Apr 16  2023 certbot\n-rw-r--r--   1 root root  201 Apr  8  2024 e2scrub_all\n-rw-r--r--   1 root root  396 Jan  9  2024 sysstat",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "world_writable_files": {
+            "command": "find /tmp /var/tmp /var/www /home -xdev -type f -perm -0002",
+            "stdout": "",
+            "stderr": "find: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-XQoaek’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-7A0FEi’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-Li8837’: Permission denied\nfind: ‘/tmp/snap-private-tmp’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-XNUR0W’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-fuAPL6’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-zeAZI8’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-eKnvWP’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-HVrK5B’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-BuwDeZ’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-yqgigv’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-2BgD6t’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-7Aj14W’: Permission denied\nfind: ‘/home/appmaster’: Permission denied\nfind: ‘/home/aimaster’: Permission denied\nfind: ‘/home/reactmaster’: Permission denied\nfind: ‘/home/agenticaipure’: Permission denied\nfind: ‘/home/aiagent’: Permission denied\nfind: ‘/home/agenticai’: Permission denied",
+            "exit_code": 1
+          },
+          "user_account_audit": {
+            "passwd": {
+              "command": "getent passwd",
+              "stdout": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\ngames:x:5:60:games:/usr/games:/usr/sbin/nologin\nman:x:6:12:man:/var/cache/man:/usr/sbin/nologin\nlp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\nmail:x:8:8:mail:/var/mail:/usr/sbin/nologin\nnews:x:9:9:news:/var/spool/news:/usr/sbin/nologin\nuucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin\nproxy:x:13:13:proxy:/bin:/usr/sbin/nologin\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin\nbackup:x:34:34:backup:/var/backups:/usr/sbin/nologin\nlist:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin\nirc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin\n_apt:x:42:65534::/nonexistent:/usr/sbin/nologin\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\nsystemd-network:x:998:998:systemd Network Management:/:/usr/sbin/nologin\nsystemd-timesync:x:996:996:systemd Time Synchronization:/:/usr/sbin/nologin\ndhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false\nmessagebus:x:101:101::/nonexistent:/usr/sbin/nologin\nsyslog:x:102:102::/nonexistent:/usr/sbin/nologin\nsystemd-resolve:x:991:991:systemd Resolver:/:/usr/sbin/nologin\nuuidd:x:103:103::/run/uuidd:/usr/sbin/nologin\ntss:x:104:104:TPM software stack,,,:/var/lib/tpm:/bin/false\nsshd:x:105:65534::/run/sshd:/usr/sbin/nologin\npollinate:x:106:1::/var/cache/pollinate:/bin/false\ntcpdump:x:107:108::/nonexistent:/usr/sbin/nologin\nlandscape:x:108:109::/var/lib/landscape:/usr/sbin/nologin\nfwupd-refresh:x:990:990:Firmware update daemon:/var/lib/fwupd:/usr/sbin/nologin\npolkitd:x:989:989:User for polkitd:/:/usr/sbin/nologin\ndo-agent:x:999:988::/home/do-agent:/bin/false\nappmaster:x:1000:1000:appmaster,,,:/home/appmaster:/bin/bash\ndnsmasq:x:997:65534:dnsmasq:/var/lib/misc:/usr/sbin/nologin\nreactmaster:x:1001:1001:,,,:/home/reactmaster:/bin/bash\naimaster:x:1002:1002:,,,:/home/aimaster:/bin/bash\nagenticai:x:1003:1003:,,,:/home/agenticai:/bin/bash\naiagent:x:1004:1004:,,,:/home/aiagent:/bin/bash\nagenticaipure:x:1005:1005:,,,:/home/agenticaipure:/bin/bash\naiagentmulti:x:1006:1006:,,,:/home/aiagentmulti:/bin/bash",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "sudo_group": {
+              "command": "getent group sudo",
+              "stdout": "sudo:x:27:appmaster,reactmaster,aimaster,agenticai,aiagent,agenticaipure,aiagentmulti",
+              "stderr": "",
+              "exit_code": 0
+            },
+            "root_group": {
+              "command": "getent group root",
+              "stdout": "root:x:0:",
+              "stderr": "",
+              "exit_code": 0
+            }
+          },
+          "fail2ban_status": {
+            "service": {
+              "command": "systemctl status fail2ban.service --no-pager",
+              "stdout": "",
+              "stderr": "Unit fail2ban.service could not be found.",
+              "exit_code": 4
+            },
+            "client": {
+              "command": "fail2ban-client status",
+              "stdout": "",
+              "stderr": "[Errno 2] No such file or directory: 'fail2ban-client'",
+              "exit_code": 127
+            }
+          },
+          "docker_security": {
+            "containers": {
+              "command": "docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}'",
+              "stdout": "",
+              "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+              "exit_code": 1
+            },
+            "security_options": {
+              "command": "docker info --format '{{json .SecurityOptions}}'",
+              "stdout": "null",
+              "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/info\": dial unix /var/run/docker.sock: connect: permission denied",
+              "exit_code": 1
+            },
+            "daemon_socket": {
+              "command": "ls -l /var/run/docker.sock",
+              "stdout": "srw-rw---- 1 root docker 0 Mar  4 14:42 /var/run/docker.sock",
+              "stderr": "",
+              "exit_code": 0
+            }
+          }
+        },
+        "message": "Security Report\n\n1. Security summary\nThe system is actively accessed via root accounts from two external IP addresses. Several services listen on all interfaces, including SSH (port 22), HTTP (port 80), and HTTPS (port 443). Root login sessions are frequent and persistent. No records for failed login attempts could be accessed due to permissions. The firewall status could not be verified (requires root). No active Fail2ban service detected. Docker daemon access is restricted, limiting container and security option visibility. Cron service is active and configured with standard system jobs. Key files and directories show no apparent world-writable regular files in scanned locations, though permission denied errors prevent a full assessment. User accounts with shell access and sudo privileges are numerous.\n\n2. Risk level\nMedium\n\n3. Notable findings\n- Root user logins sourced from two external IPs (185.43.231.253 and 185.43.229.238) and sessions have been long-lived.\n- SSH service logs are inaccessible under current permission, preventing review of authentication events.\n- Failed login attempts cannot be audited due to lack of permission on /var/log/btmp.\n- Firewall status not available, preventing assessment of network filtering posture.\n- No Fail2ban service found, which could reduce automated blocking of brute force attacks.\n- Multiple users (seven) have sudo privileges, potentially increasing risk of privilege misuse.\n- Several services exposed on all network interfaces on ports 22, 80, 443, 8000, and 8005 without confirmation of their secure configuration.\n- Docker command denied due to permission issues; unable to audit containers or docker security options.\n- World-writable files scan incomplete due to permission denied on many directories and user home folders.\n\n4. Recommended low-risk actions\n- Request elevated permissions or root access to review failed login attempts via `lastb` and access SSH logs (`journalctl -u ssh.service`).\n- Run `sudo ufw status` or equivalent firewall commands as root to assess firewall configuration.\n- Review SSH daemon config under root to ensure best practices (disallow root login if possible, use key-based auth).\n- Review sudoers files and restrict sudo privileges to needed users only.\n- Confirm the services listening on additional ports (8000, 8005, etc.) are secured and up-to-date.\n- Confirm Docker group membership and security further by accessing docker commands with proper permissions.\n- Conduct a full world-writable files scan from root to identify any security risks.\n- Consider installing and enabling Fail2ban or similar intrusion prevention tools.\n\n5. Items that need manual review\n- The legitimacy of the root login IP addresses and whether such direct root logins are justified.\n- The security posture of exposed services, notably web servers and Redis on localhost.\n- The sudo privileges assigned to multiple users — confirm necessity and review audit logs.\n- Docker daemon socket permissions and usage to prevent unauthorized container control.\n- Cron jobs content review for any suspicious or unexpected scheduled tasks.\n- Potential risk from the lack of visible firewall status and active intrusion prevention.\n- Verification of possible sensitive data exposure due to inability to scan some directories and files caused by permission limitations.\n\nSummary: The current setup shows active root sessions and multiple open external network services without full visibility of log and firewall records due to permission restrictions. Elevated access is recommended for comprehensive review and operational tightening of access controls, service exposure, and logging mechanisms to reduce risk exposure."
+      }
+    },
+    "remediation_advisor": {
+      "name": "RemediationAdvisorAgent",
+      "role": "remediation_advisor",
+      "report": {
+        "role": "remediation_advisor",
+        "snapshot": {
+          "priority_signals": [
+            {
+              "source": "system_health",
+              "priority": "high",
+              "signal": "Root filesystem pressure detected."
+            },
+            {
+              "source": "system_health",
+              "priority": "medium",
+              "signal": "nginx may be inactive or not serving traffic."
+            },
+            {
+              "source": "security_review",
+              "priority": "high",
+              "signal": "Remote root access should be validated."
+            },
+            {
+              "source": "security_review",
+              "priority": "medium",
+              "signal": "Host brute-force protection status needs review."
+            }
+          ],
+          "low_risk_actions": {
+            "check_cron_security": {
+              "action_name": "check_cron_security",
+              "description": "Review cron jobs and scheduled tasks."
+            },
+            "check_disk": {
+              "action_name": "check_disk",
+              "description": "Re-check root filesystem usage before cleanup decisions."
+            },
+            "check_disk_io": {
+              "action_name": "check_disk_io",
+              "description": "Inspect storage latency before changing workloads."
+            },
+            "check_docker_health": {
+              "action_name": "check_docker_health",
+              "description": "Review running containers and point-in-time Docker stats."
+            },
+            "check_docker_security": {
+              "action_name": "check_docker_security",
+              "description": "Inspect Docker security options and socket exposure."
+            },
+            "check_fail2ban_status": {
+              "action_name": "check_fail2ban_status",
+              "description": "Verify brute-force protection status."
+            },
+            "check_failed_services": {
+              "action_name": "check_failed_services",
+              "description": "List failed systemd services that may need recovery."
+            },
+            "check_firewall": {
+              "action_name": "check_firewall",
+              "description": "Verify host firewall policy and open access."
+            },
+            "check_log_rotation_health": {
+              "action_name": "check_log_rotation_health",
+              "description": "Confirm logrotate is healthy to avoid log growth."
+            },
+            "check_memory": {
+              "action_name": "check_memory",
+              "description": "Re-check memory pressure before changing processes."
+            },
+            "check_network_health": {
+              "action_name": "check_network_health",
+              "description": "Inspect interfaces and routes for network issues."
+            },
+            "check_open_ports": {
+              "action_name": "check_open_ports",
+              "description": "Review listening ports and exposed services."
+            },
+            "check_uptime": {
+              "action_name": "check_uptime",
+              "description": "Confirm load and uptime before deeper remediation."
+            },
+            "check_user_account_audit": {
+              "action_name": "check_user_account_audit",
+              "description": "Review local users and privileged group membership."
+            },
+            "check_world_writable_files": {
+              "action_name": "check_world_writable_files",
+              "description": "Inspect risky file permissions in common paths."
+            },
+            "inspect_root_sizes": {
+              "action_name": "inspect_root_sizes",
+              "description": "Locate large directories under root."
+            },
+            "inspect_var_log_sizes": {
+              "action_name": "inspect_var_log_sizes",
+              "description": "Locate large logs and log directories."
+            },
+            "list_active_sessions": {
+              "action_name": "list_active_sessions",
+              "description": "Review current interactive sessions."
+            },
+            "list_failed_logins": {
+              "action_name": "list_failed_logins",
+              "description": "Review recent failed authentication attempts."
+            },
+            "list_recent_logins": {
+              "action_name": "list_recent_logins",
+              "description": "Review recent successful authentication history."
+            },
+            "read_kernel_errors": {
+              "action_name": "read_kernel_errors",
+              "description": "Check recent kernel-level error messages."
+            },
+            "read_nginx_logs": {
+              "action_name": "read_nginx_logs",
+              "description": "Inspect recent nginx service logs."
+            },
+            "read_ssh_config_audit": {
+              "action_name": "read_ssh_config_audit",
+              "description": "Review effective SSH daemon configuration."
+            },
+            "read_ssh_logs": {
+              "action_name": "read_ssh_logs",
+              "description": "Inspect recent SSH service logs."
+            },
+            "read_sudo_activity": {
+              "action_name": "read_sudo_activity",
+              "description": "Review recent sudo command activity."
+            },
+            "read_system_logs": {
+              "action_name": "read_system_logs",
+              "description": "Inspect recent general system journal entries."
+            },
+            "status_service": {
+              "action_name": "status_service",
+              "description": "Check one monitored service status explicitly."
+            }
+          }
+        },
+        "details": {
+          "health_report": {
+            "role": "system_health",
+            "snapshot": {
+              "disk": {
+                "command": "df -h /",
+                "stdout": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/vda1        33G   28G  5.1G  85% /",
+                "stderr": "",
+                "exit_code": 0,
+                "root_filesystem_line": "/dev/vda1        33G   28G  5.1G  85% /"
+              },
+              "disk_io": {
+                "command": "iostat -xz 1 1",
+                "stdout": "Linux 6.8.0-101-generic (onboard21) \t03/18/26 \t_x86_64_\t(2 CPU)\n\navg-cpu:  %user   %nice %system %iowait  %steal   %idle\n           2.19    0.01    1.03    0.03    0.11   96.62\n\nDevice            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util\nloop0            0.00      0.00     0.00   0.00    0.00     1.27    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00\nvda              0.25      4.73     0.07  22.03    0.44    19.01    2.78     26.15     0.92  24.91    1.69     9.40    0.02     26.41     0.00   0.00    0.16  1087.28    0.15    1.05    0.00   0.09\nvdb              0.00      0.00     0.00   0.00    0.11     3.83    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "memory": {
+                "command": "free -m",
+                "stdout": "total        used        free      shared  buff/cache   available\nMem:            3915        1867         177          48        2209        2048\nSwap:              0           0           0",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "uptime": "17:21:57 up 14 days,  2:39,  4 users,  load average: 0.03, 0.08, 0.13",
+              "services": {
+                "nginx": {
+                  "command": "systemctl status nginx --no-pager",
+                  "stdout": "○ nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: enabled)\n     Active: inactive (dead)\n       Docs: man:nginx(8)",
+                  "stderr": "",
+                  "exit_code": 3,
+                  "service": "nginx",
+                  "allowed": true
+                },
+                "docker": {
+                  "command": "systemctl status docker --no-pager",
+                  "stdout": "● docker.service - Docker Application Container Engine\n     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)\n     Active: active (running) since Wed 2026-03-04 14:42:44 UTC; 2 weeks 0 days ago\nTriggeredBy: ● docker.socket\n       Docs: https://docs.docker.com\n   Main PID: 1205 (dockerd)\n      Tasks: 79\n     Memory: 130.0M (peak: 1020.4M)\n        CPU: 1h 3min 41.611s\n     CGroup: /system.slice/docker.service\n             ├─   1205 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock\n             ├─   1840 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 6379 -container-ip 172.19.0.2 -container-port 6379 -use-listen-fd\n             ├─  17987 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 80 -container-ip 172.19.0.4 -container-port 80 -use-listen-fd\n             ├─  17992 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 80 -container-ip 172.19.0.4 -container-port 80 -use-listen-fd\n             ├─  18000 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 443 -container-ip 172.19.0.4 -container-port 443 -use-listen-fd\n             ├─  18006 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 443 -container-ip 172.19.0.4 -container-port 443 -use-listen-fd\n             ├─2875141 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8000 -container-ip 172.20.0.4 -container-port 8000 -use-listen-fd\n             ├─2875148 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8000 -container-ip 172.20.0.4 -container-port 8000 -use-listen-fd\n             ├─3275303 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8005 -container-ip 172.21.0.5 -container-port 8001 -use-listen-fd\n             └─3275308 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8005 -container-ip 172.21.0.5 -container-port 8001 -use-listen-fd\n\nWarning: some journal files were not opened due to insufficient permissions.",
+                  "stderr": "",
+                  "exit_code": 0,
+                  "service": "docker",
+                  "allowed": true
+                },
+                "ssh": {
+                  "command": "systemctl status ssh --no-pager",
+                  "stdout": "● ssh.service - OpenBSD Secure Shell server\n     Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: enabled)\n     Active: active (running) since Fri 2026-03-13 06:05:19 UTC; 5 days ago\nTriggeredBy: ● ssh.socket\n       Docs: man:sshd(8)\n             man:sshd_config(5)\n    Process: 3401978 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)\n   Main PID: 3401980 (sshd)\n      Tasks: 3 (limit: 4655)\n     Memory: 22.5M (peak: 42.8M)\n        CPU: 22min 20.638s\n     CGroup: /system.slice/ssh.service\n             ├─1388413 \"sshd: unknown [priv]\"\n             ├─1388421 \"sshd: unknown [net]\"\n             └─3401980 \"sshd: /usr/sbin/sshd -D [listener] 1 of 10-100 startups\"\n\nWarning: some journal files were not opened due to insufficient permissions.",
+                  "stderr": "",
+                  "exit_code": 0,
+                  "service": "ssh",
+                  "allowed": true
+                }
+              },
+              "failed_services": {
+                "command": "systemctl --failed --no-pager --no-legend",
+                "stdout": "",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "docker_health": {
+                "containers": {
+                  "command": "docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.RunningFor}}\t{{.Image}}'",
+                  "stdout": "",
+                  "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+                  "exit_code": 1
+                },
+                "stats": {
+                  "command": "docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}'",
+                  "stdout": "",
+                  "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+                  "exit_code": 1
+                }
+              },
+              "network_health": {
+                "interfaces": {
+                  "command": "ip -brief address",
+                  "stdout": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neth0             UP             174.138.14.66/20 10.18.0.7/16 fe80::f036:37ff:feba:e861/64 \neth1             UP             10.110.0.4/20 fe80::ecc4:aaff:fe4f:ef9f/64 \nbr-c728bf0249ab  DOWN           172.18.0.1/16 \ndocker0          DOWN           172.17.0.1/16 fe80::14aa:49ff:fe71:cef/64 \nbr-a30077fc3f07  UP             172.19.0.1/16 fe80::f092:67ff:fec5:6a65/64 \nveth98488e7@if2  UP             fe80::7482:faff:fe5e:34fb/64 \nveth2f2ad8a@if2  UP             fe80::8c4a:43ff:febb:48df/64 \nbr-d852a7736fe6  UP             172.21.0.1/16 fe80::784b:edff:feef:d2c5/64 \nvethb6c9a63@if2  UP             fe80::f081:81ff:feff:3959/64 \nveth29aac87@if2  UP             fe80::d8de:b0ff:fe9e:e8e/64 \nveth3b04dd2@if2  UP             fe80::4416:32ff:febd:acff/64 \nvethdbe2045@if2  UP             fe80::7c54:68ff:fe47:63ed/64 \nveth6695772@if2  UP             fe80::d4f7:b7ff:fef9:4a51/64 \nveth8438546@if2  UP             fe80::78aa:40ff:feb4:a501/64 \nvethc335e41@if2  UP             fe80::a434:31ff:fe90:a655/64 \nveth4196658@if2  UP             fe80::10f0:acff:feec:434/64 \nbr-d6149ae0ab47  UP             172.20.0.1/16 fe80::d81a:97ff:fe54:28f7/64 \nveth5601011@if2  UP             fe80::1448:d4ff:fe5c:da16/64 \nvetha35daee@if2  UP             fe80::a463:2eff:fe8f:3e34/64 \nvethe09371f@if2  UP             fe80::f098:b7ff:fe20:e90f/64 \nvethc3f7f8d@if2  UP             fe80::601e:5cff:feb3:689d/64",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "routes": {
+                  "command": "ip route",
+                  "stdout": "default via 174.138.0.1 dev eth0 proto static \n10.18.0.0/16 dev eth0 proto kernel scope link src 10.18.0.7 \n10.110.0.0/20 dev eth1 proto kernel scope link src 10.110.0.4 \n172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown \n172.18.0.0/16 dev br-c728bf0249ab proto kernel scope link src 172.18.0.1 linkdown \n172.19.0.0/16 dev br-a30077fc3f07 proto kernel scope link src 172.19.0.1 \n172.20.0.0/16 dev br-d6149ae0ab47 proto kernel scope link src 172.20.0.1 \n172.21.0.0/16 dev br-d852a7736fe6 proto kernel scope link src 172.21.0.1 \n174.138.0.0/20 dev eth0 proto kernel scope link src 174.138.14.66",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "kernel_errors": {
+                "command": "journalctl -k -p err -n 20 --no-pager",
+                "stdout": "-- No entries --",
+                "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                "exit_code": 0
+              },
+              "log_rotation_health": {
+                "service": {
+                  "command": "systemctl status logrotate.service --no-pager",
+                  "stdout": "○ logrotate.service - Rotate log files\n     Loaded: loaded (/usr/lib/systemd/system/logrotate.service; static)\n     Active: inactive (dead) since Wed 2026-03-18 00:00:13 UTC; 17h ago\nTriggeredBy: ● logrotate.timer\n       Docs: man:logrotate(8)\n             man:logrotate.conf(5)\n    Process: 1118576 ExecStart=/usr/sbin/logrotate /etc/logrotate.conf (code=exited, status=0/SUCCESS)\n   Main PID: 1118576 (code=exited, status=0/SUCCESS)\n        CPU: 158ms",
+                  "stderr": "",
+                  "exit_code": 3
+                },
+                "timer": {
+                  "command": "systemctl status logrotate.timer --no-pager",
+                  "stdout": "● logrotate.timer - Daily rotation of log files\n     Loaded: loaded (/usr/lib/systemd/system/logrotate.timer; enabled; preset: enabled)\n     Active: active (waiting) since Wed 2026-03-04 14:42:35 UTC; 2 weeks 0 days ago\n    Trigger: Thu 2026-03-19 00:00:00 UTC; 6h left\n   Triggers: ● logrotate.service\n       Docs: man:logrotate(8)\n             man:logrotate.conf(5)\n\nWarning: some journal files were not opened due to insufficient permissions.",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "nginx": {
+                "service_status": {
+                  "command": "systemctl status nginx --no-pager",
+                  "stdout": "○ nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: enabled)\n     Active: inactive (dead)\n       Docs: man:nginx(8)",
+                  "stderr": "",
+                  "exit_code": 3,
+                  "service": "nginx",
+                  "allowed": true
+                },
+                "logs": {
+                  "command": "journalctl -u nginx.service -n 20 --no-pager",
+                  "stdout": "-- No entries --",
+                  "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                  "exit_code": 0
+                }
+              },
+              "recent_logs": {
+                "command": "journalctl -n 20 --no-pager --output short",
+                "stdout": "Mar 18 15:29:35 onboard21 systemd[1341697]: Created slice app.slice - User Application Slice.\nMar 18 15:29:35 onboard21 systemd[1341697]: Started launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target paths.target - Paths.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target timers.target - Timers.\nMar 18 15:29:35 onboard21 systemd[1341697]: Starting dbus.socket - D-Bus User Message Bus Socket...\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on dirmngr.socket - GnuPG network certificate management daemon.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).\nMar 18 15:29:35 onboard21 systemd[1341697]: Starting gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on keyboxd.socket - GnuPG public key management service.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on pk-debconf-helper.socket - debconf communication socket.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on snapd.session-agent.socket - REST API socket for snapd user session agent.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on dbus.socket - D-Bus User Message Bus Socket.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target sockets.target - Sockets.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target basic.target - Basic System.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target default.target - Main User Target.\nMar 18 15:29:35 onboard21 systemd[1341697]: Startup finished in 354ms.\nMar 18 15:34:45 onboard21 systemd[1341697]: launchpadlib-cache-clean.service - Clean up old files in the Launchpadlib cache was skipped because of an unmet condition check (ConditionPathExists=/home/aiagentmulti/.launchpadlib/api.launchpad.net/cache).",
+                "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                "exit_code": 0
+              }
+            },
+            "details": {
+              "disk": {
+                "command": "df -h /",
+                "stdout": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/vda1        33G   28G  5.1G  85% /",
+                "stderr": "",
+                "exit_code": 0,
+                "root_filesystem_line": "/dev/vda1        33G   28G  5.1G  85% /"
+              },
+              "disk_io": {
+                "command": "iostat -xz 1 1",
+                "stdout": "Linux 6.8.0-101-generic (onboard21) \t03/18/26 \t_x86_64_\t(2 CPU)\n\navg-cpu:  %user   %nice %system %iowait  %steal   %idle\n           2.19    0.01    1.03    0.03    0.11   96.62\n\nDevice            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util\nloop0            0.00      0.00     0.00   0.00    0.00     1.27    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00\nvda              0.25      4.73     0.07  22.03    0.44    19.01    2.78     26.15     0.92  24.91    1.69     9.40    0.02     26.41     0.00   0.00    0.16  1087.28    0.15    1.05    0.00   0.09\nvdb              0.00      0.00     0.00   0.00    0.11     3.83    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "memory": {
+                "command": "free -m",
+                "stdout": "total        used        free      shared  buff/cache   available\nMem:            3915        1867         177          48        2209        2048\nSwap:              0           0           0",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "uptime": "17:21:57 up 14 days,  2:39,  4 users,  load average: 0.03, 0.08, 0.13",
+              "swap": {
+                "free": {
+                  "command": "free -m",
+                  "stdout": "total        used        free      shared  buff/cache   available\nMem:            3915        1877         168          48        2209        2038\nSwap:              0           0           0",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "swapon": {
+                  "command": "swapon --show",
+                  "stdout": "",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "inode": {
+                "command": "df -i /",
+                "stdout": "Filesystem      Inodes   IUsed   IFree IUse% Mounted on\n/dev/vda1      4456448 1012200 3444248   23% /",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "root_sizes": {
+                "command": "du -xh --max-depth=1 /",
+                "stdout": "3.1M\t/projectmedia\n4.0K\t/bin.usr-is-merged\n6.6M\t/etc\n8.0K\t/snap\n4.0K\t/sbin.usr-is-merged\n4.0K\t/projectdata\n4.0K\t/mnt\n3.0G\t/var\n27M\t/opt\n393M\t/home\n2.6G\t/usr\n4.0K\t/media\n196K\t/tmp\n4.0K\t/lib.usr-is-merged\n4.0K\t/srv\n4.0K\t/root\n16K\t/lost+found\n6.0G\t/",
+                "stderr": "du: cannot read directory '/etc/credstore.encrypted': Permission denied\ndu: cannot read directory '/etc/multipath': Permission denied\ndu: cannot read directory '/etc/sudoers.d': Permission denied\ndu: cannot read directory '/etc/ssl/private': Permission denied\ndu: cannot read directory '/etc/polkit-1/rules.d': Permission denied\ndu: cannot read directory '/etc/credstore': Permission denied\ndu: cannot read directory '/etc/letsencrypt/archive': Permission denied\ndu: cannot read directory '/etc/letsencrypt/live': Permission denied\ndu: cannot read directory '/etc/letsencrypt/accounts': Permission denied\ndu: cannot read directory '/etc/cni/net.d': Permission denied\ndu: cannot read directory '/projectdata': Permission denied\ndu: cannot read directory '/var/log/unattended-upgrades': Permission denied\ndu: cannot read directory '/var/log/letsencrypt': Permission denied\ndu: cannot read directory '/var/log/private': Permission denied\ndu: cannot read directory '/var/lib/ubuntu-advantage/apt-esm/var/lib/apt/lists/partial': Permission denied\ndu: cannot read directory '/var/lib/fwupd/gnupg': Permission denied\ndu: cannot read directory '/var/lib/polkit-1': Permission denied\ndu: cannot read directory '/var/lib/apt/lists/partial': Permission denied\ndu: cannot read directory '/var/lib/snapd/cookie': Permission denied\ndu: cannot read directory '/var/lib/snapd/void': Permission denied\ndu: cannot read directory '/var/lib/containerd': Permission denied\ndu: cannot read directory '/var/lib/update-notifier/package-data-downloads/partial': Permission denied\ndu: cannot read directory '/var/lib/udisks2': Permission denied\ndu: cannot read directory '/var/lib/nginx/body': Permission denied\ndu: cannot read directory '/var/lib/nginx/uwsgi': Permission denied\ndu: cannot read directory '/var/lib/nginx/fastcgi': Permission denied\ndu: cannot read directory '/var/lib/nginx/scgi': Permission denied\ndu: cannot read directory '/var/lib/nginx/proxy': Permission denied\ndu: cannot read directory '/var/lib/private': Permission denied\ndu: cannot read directory '/var/lib/docker': Permission denied\ndu: cannot read directory '/var/cache/apparmor/2693c843.0': Permission denied\ndu: cannot read directory '/var/cache/apt/archives/partial': Permission denied\ndu: cannot read directory '/var/cache/ldconfig': Permission denied\ndu: cannot read directory '/var/cache/pollinate': Permission denied\ndu: cannot read directory '/var/cache/private': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-eKnvWP': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-HVrK5B': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-BuwDeZ': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-yqgigv': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-2BgD6t': Permission denied\ndu: cannot read directory '/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-7Aj14W': Permission denied\ndu: cannot read directory '/var/spool/rsyslog': Permission denied\ndu: cannot read directory '/var/spool/cron/crontabs': Permission denied\ndu: cannot read directory '/opt/containerd': Permission denied\ndu: cannot read directory '/home/appmaster': Permission denied\ndu: cannot read directory '/home/aimaster': Permission denied\ndu: cannot read directory '/home/reactmaster': Permission denied\ndu: cannot read directory '/home/agenticaipure': Permission denied\ndu: cannot read directory '/home/aiagent': Permission denied\ndu: cannot read directory '/home/agenticai': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-XQoaek': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-7A0FEi': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-Li8837': Permission denied\ndu: cannot read directory '/tmp/snap-private-tmp': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-XNUR0W': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-fuAPL6': Permission denied\ndu: cannot read directory '/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-zeAZI8': Permission denied\ndu: cannot read directory '/root': Permission denied\ndu: cannot read directory '/lost+found': Permission denied",
+                "exit_code": 1
+              },
+              "var_log_sizes": {
+                "command": "du -xh --max-depth=1 /var/log",
+                "stdout": "132K\t/var/log/apt\n4.0K\t/var/log/unattended-upgrades\n4.0K\t/var/log/letsencrypt\n316K\t/var/log/nginx\n4.0K\t/var/log/dist-upgrade\n2.1G\t/var/log/journal\n4.0K\t/var/log/private\n13M\t/var/log/sysstat\n4.0K\t/var/log/landscape\n2.5G\t/var/log",
+                "stderr": "du: cannot read directory '/var/log/unattended-upgrades': Permission denied\ndu: cannot read directory '/var/log/letsencrypt': Permission denied\ndu: cannot read directory '/var/log/private': Permission denied",
+                "exit_code": 1
+              },
+              "failed_services": {
+                "command": "systemctl --failed --no-pager --no-legend",
+                "stdout": "",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "docker_health": {
+                "containers": {
+                  "command": "docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.RunningFor}}\t{{.Image}}'",
+                  "stdout": "",
+                  "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+                  "exit_code": 1
+                },
+                "stats": {
+                  "command": "docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}'",
+                  "stdout": "",
+                  "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+                  "exit_code": 1
+                }
+              },
+              "network_health": {
+                "interfaces": {
+                  "command": "ip -brief address",
+                  "stdout": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neth0             UP             174.138.14.66/20 10.18.0.7/16 fe80::f036:37ff:feba:e861/64 \neth1             UP             10.110.0.4/20 fe80::ecc4:aaff:fe4f:ef9f/64 \nbr-c728bf0249ab  DOWN           172.18.0.1/16 \ndocker0          DOWN           172.17.0.1/16 fe80::14aa:49ff:fe71:cef/64 \nbr-a30077fc3f07  UP             172.19.0.1/16 fe80::f092:67ff:fec5:6a65/64 \nveth98488e7@if2  UP             fe80::7482:faff:fe5e:34fb/64 \nveth2f2ad8a@if2  UP             fe80::8c4a:43ff:febb:48df/64 \nbr-d852a7736fe6  UP             172.21.0.1/16 fe80::784b:edff:feef:d2c5/64 \nvethb6c9a63@if2  UP             fe80::f081:81ff:feff:3959/64 \nveth29aac87@if2  UP             fe80::d8de:b0ff:fe9e:e8e/64 \nveth3b04dd2@if2  UP             fe80::4416:32ff:febd:acff/64 \nvethdbe2045@if2  UP             fe80::7c54:68ff:fe47:63ed/64 \nveth6695772@if2  UP             fe80::d4f7:b7ff:fef9:4a51/64 \nveth8438546@if2  UP             fe80::78aa:40ff:feb4:a501/64 \nvethc335e41@if2  UP             fe80::a434:31ff:fe90:a655/64 \nveth4196658@if2  UP             fe80::10f0:acff:feec:434/64 \nbr-d6149ae0ab47  UP             172.20.0.1/16 fe80::d81a:97ff:fe54:28f7/64 \nveth5601011@if2  UP             fe80::1448:d4ff:fe5c:da16/64 \nvetha35daee@if2  UP             fe80::a463:2eff:fe8f:3e34/64 \nvethe09371f@if2  UP             fe80::f098:b7ff:fe20:e90f/64 \nvethc3f7f8d@if2  UP             fe80::601e:5cff:feb3:689d/64",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "routes": {
+                  "command": "ip route",
+                  "stdout": "default via 174.138.0.1 dev eth0 proto static \n10.18.0.0/16 dev eth0 proto kernel scope link src 10.18.0.7 \n10.110.0.0/20 dev eth1 proto kernel scope link src 10.110.0.4 \n172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown \n172.18.0.0/16 dev br-c728bf0249ab proto kernel scope link src 172.18.0.1 linkdown \n172.19.0.0/16 dev br-a30077fc3f07 proto kernel scope link src 172.19.0.1 \n172.20.0.0/16 dev br-d6149ae0ab47 proto kernel scope link src 172.20.0.1 \n172.21.0.0/16 dev br-d852a7736fe6 proto kernel scope link src 172.21.0.1 \n174.138.0.0/20 dev eth0 proto kernel scope link src 174.138.14.66",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "kernel_errors": {
+                "command": "journalctl -k -p err -n 20 --no-pager",
+                "stdout": "-- No entries --",
+                "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                "exit_code": 0
+              },
+              "log_rotation_health": {
+                "service": {
+                  "command": "systemctl status logrotate.service --no-pager",
+                  "stdout": "○ logrotate.service - Rotate log files\n     Loaded: loaded (/usr/lib/systemd/system/logrotate.service; static)\n     Active: inactive (dead) since Wed 2026-03-18 00:00:13 UTC; 17h ago\nTriggeredBy: ● logrotate.timer\n       Docs: man:logrotate(8)\n             man:logrotate.conf(5)\n    Process: 1118576 ExecStart=/usr/sbin/logrotate /etc/logrotate.conf (code=exited, status=0/SUCCESS)\n   Main PID: 1118576 (code=exited, status=0/SUCCESS)\n        CPU: 158ms",
+                  "stderr": "",
+                  "exit_code": 3
+                },
+                "timer": {
+                  "command": "systemctl status logrotate.timer --no-pager",
+                  "stdout": "● logrotate.timer - Daily rotation of log files\n     Loaded: loaded (/usr/lib/systemd/system/logrotate.timer; enabled; preset: enabled)\n     Active: active (waiting) since Wed 2026-03-04 14:42:35 UTC; 2 weeks 0 days ago\n    Trigger: Thu 2026-03-19 00:00:00 UTC; 6h left\n   Triggers: ● logrotate.service\n       Docs: man:logrotate(8)\n             man:logrotate.conf(5)\n\nWarning: some journal files were not opened due to insufficient permissions.",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "nginx": {
+                "service_status": {
+                  "command": "systemctl status nginx --no-pager",
+                  "stdout": "○ nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: enabled)\n     Active: inactive (dead)\n       Docs: man:nginx(8)",
+                  "stderr": "",
+                  "exit_code": 3,
+                  "service": "nginx",
+                  "allowed": true
+                },
+                "logs": {
+                  "command": "journalctl -u nginx.service -n 20 --no-pager",
+                  "stdout": "-- No entries --",
+                  "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                  "exit_code": 0
+                }
+              },
+              "recent_logs": {
+                "command": "journalctl -n 20 --no-pager --output short",
+                "stdout": "Mar 18 15:29:35 onboard21 systemd[1341697]: Created slice app.slice - User Application Slice.\nMar 18 15:29:35 onboard21 systemd[1341697]: Started launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target paths.target - Paths.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target timers.target - Timers.\nMar 18 15:29:35 onboard21 systemd[1341697]: Starting dbus.socket - D-Bus User Message Bus Socket...\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on dirmngr.socket - GnuPG network certificate management daemon.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).\nMar 18 15:29:35 onboard21 systemd[1341697]: Starting gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on keyboxd.socket - GnuPG public key management service.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on pk-debconf-helper.socket - debconf communication socket.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on snapd.session-agent.socket - REST API socket for snapd user session agent.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on dbus.socket - D-Bus User Message Bus Socket.\nMar 18 15:29:35 onboard21 systemd[1341697]: Listening on gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target sockets.target - Sockets.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target basic.target - Basic System.\nMar 18 15:29:35 onboard21 systemd[1341697]: Reached target default.target - Main User Target.\nMar 18 15:29:35 onboard21 systemd[1341697]: Startup finished in 354ms.\nMar 18 15:34:45 onboard21 systemd[1341697]: launchpadlib-cache-clean.service - Clean up old files in the Launchpadlib cache was skipped because of an unmet condition check (ConditionPathExists=/home/aiagentmulti/.launchpadlib/api.launchpad.net/cache).",
+                "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                "exit_code": 0
+              },
+              "services": {
+                "nginx": {
+                  "command": "systemctl status nginx --no-pager",
+                  "stdout": "○ nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: enabled)\n     Active: inactive (dead)\n       Docs: man:nginx(8)",
+                  "stderr": "",
+                  "exit_code": 3,
+                  "service": "nginx",
+                  "allowed": true
+                },
+                "docker": {
+                  "command": "systemctl status docker --no-pager",
+                  "stdout": "● docker.service - Docker Application Container Engine\n     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)\n     Active: active (running) since Wed 2026-03-04 14:42:44 UTC; 2 weeks 0 days ago\nTriggeredBy: ● docker.socket\n       Docs: https://docs.docker.com\n   Main PID: 1205 (dockerd)\n      Tasks: 79\n     Memory: 130.0M (peak: 1020.4M)\n        CPU: 1h 3min 41.611s\n     CGroup: /system.slice/docker.service\n             ├─   1205 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock\n             ├─   1840 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 6379 -container-ip 172.19.0.2 -container-port 6379 -use-listen-fd\n             ├─  17987 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 80 -container-ip 172.19.0.4 -container-port 80 -use-listen-fd\n             ├─  17992 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 80 -container-ip 172.19.0.4 -container-port 80 -use-listen-fd\n             ├─  18000 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 443 -container-ip 172.19.0.4 -container-port 443 -use-listen-fd\n             ├─  18006 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 443 -container-ip 172.19.0.4 -container-port 443 -use-listen-fd\n             ├─2875141 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8000 -container-ip 172.20.0.4 -container-port 8000 -use-listen-fd\n             ├─2875148 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8000 -container-ip 172.20.0.4 -container-port 8000 -use-listen-fd\n             ├─3275303 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8005 -container-ip 172.21.0.5 -container-port 8001 -use-listen-fd\n             └─3275308 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8005 -container-ip 172.21.0.5 -container-port 8001 -use-listen-fd\n\nWarning: some journal files were not opened due to insufficient permissions.",
+                  "stderr": "",
+                  "exit_code": 0,
+                  "service": "docker",
+                  "allowed": true
+                },
+                "ssh": {
+                  "command": "systemctl status ssh --no-pager",
+                  "stdout": "● ssh.service - OpenBSD Secure Shell server\n     Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: enabled)\n     Active: active (running) since Fri 2026-03-13 06:05:19 UTC; 5 days ago\nTriggeredBy: ● ssh.socket\n       Docs: man:sshd(8)\n             man:sshd_config(5)\n    Process: 3401978 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)\n   Main PID: 3401980 (sshd)\n      Tasks: 3 (limit: 4655)\n     Memory: 22.5M (peak: 42.8M)\n        CPU: 22min 20.638s\n     CGroup: /system.slice/ssh.service\n             ├─1388413 \"sshd: unknown [priv]\"\n             ├─1388421 \"sshd: unknown [net]\"\n             └─3401980 \"sshd: /usr/sbin/sshd -D [listener] 1 of 10-100 startups\"\n\nWarning: some journal files were not opened due to insufficient permissions.",
+                  "stderr": "",
+                  "exit_code": 0,
+                  "service": "ssh",
+                  "allowed": true
+                }
+              }
+            },
+            "message": "Linux Server Health Report\n==========================\n\n1. Executive summary\n--------------------\nThe server is generally stable with low CPU load and no kernel errors. Memory and disk input/output are operating normally, and the key services Docker and SSH are up and running smoothly. However, root filesystem disk usage is relatively high at 85%, and the NGINX web server service is inactive. Docker container details cannot be retrieved due to permission issues. Logrotate service ran successfully but is currently inactive, relying on the timer.\n\n2. Healthy signals\n------------------\n- CPU load averages are very low: 0.03 (1min), 0.08 (5min), 0.13 (15min).\n- Memory has 2GB available out of 3.9GB total, with no swap in use.\n- Disk IO utilization on main device (vda) is minimal (0.09% use).\n- No kernel errors detected in recent logs.\n- Docker service is active and running for over 2 weeks without interruption.\n- SSH service is active and running for 5 days.\n- Network interfaces eth0 and eth1 are UP and configured with valid IPs.\n- Logrotate last ran successfully with exit status 0; the timer is enabled and active.\n\n3. Risky signals\n----------------\n- Root filesystem usage is at 85% capacity (28GB used of 33GB); risk of running out of space if growth continues.\n- NGINX service is inactive (dead) and disabled; no recent logs available explaining the cause.\n- Docker container listing and stats commands fail due to permission denied on the Docker socket, preventing monitoring of container health.\n- Multiple permission denied errors when attempting detailed disk usage in /, limiting insight into large directories.\n- Several Docker-related network bridges/interfaces are DOWN, which may impact container networking.\n- Log directories (/var/log/unattended-upgrades, /var/log/letsencrypt, /var/log/private) show permission denied, limiting log visibility.\n\n4. Recommended low-risk actions\n-------------------------------\n- Monitor disk space usage and clean up or expand root filesystem to keep usage below ~80%.\n- Investigate why the NGINX service is disabled and not running; enable and start if required.\n- Review Docker socket permissions or run docker commands with sufficient privileges to gain visibility into running containers and resource usage.\n- Check and adjust permissions for critical log directories and Docker directories to enable better monitoring and troubleshooting.\n- Verify the status of Docker bridge interfaces currently DOWN; restart or reconfigure if they affect active containers.\n\n5. Items that need manual review\n-------------------------------\n- Root cause for NGINX being inactive despite being enabled by preset (suggest checking config, errors, and dependencies).\n- Assess why multiple permission denials occur for important directories and services; investigate potential security policy restrictions or ownership issues.\n- Confirm if disabled Docker network bridges are expected or symptomatic of container/network misconfiguration.\n- Plan for disk usage growth in root filesystem considering current 85% utilization and large /var/log journal (2.1GB) and /var/log total 2.5GB usage.\n- Review Docker service logs and container runtime states once permissions issues are resolved.\n\nSummary: The server is mostly healthy in CPU, memory, and critical services Docker and SSH. Attention is needed for disk space pressure, NGINX service inactivity, Docker monitoring permissions, and restricted log access. These should be addressed to prevent service disruption and maintain operational visibility."
+          },
+          "security_report": {
+            "role": "security_review",
+            "snapshot": {
+              "active_sessions": {
+                "command": "who",
+                "stdout": "root     pts/0        2026-03-18 15:30 (185.43.231.253)",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "recent_logins": {
+                "command": "last -n 10",
+                "stdout": "root     pts/0        185.43.231.253   Wed Mar 18 15:30   still logged in\nroot     pts/0        185.43.231.253   Tue Mar 17 21:19 - 23:44  (02:25)\nroot     pts/0        185.43.231.253   Mon Mar 16 15:33 - 01:27  (09:54)\nroot     pts/3        185.43.229.238   Sat Mar 14 23:23 - 02:47  (03:24)\nroot     pts/2        185.43.229.238   Sat Mar 14 23:20 - 01:34  (02:13)\nroot     pts/1        185.43.229.238   Sat Mar 14 21:47 - 00:29  (02:42)\nroot     pts/0        185.43.231.253   Sat Mar 14 15:47 - 23:35  (07:47)\nroot     pts/0        185.43.231.253   Fri Mar 13 21:15 - 01:18  (04:02)\nroot     pts/0        185.43.231.253   Thu Mar 12 21:31 - 01:50  (04:19)\nroot     pts/0        185.43.231.253   Wed Mar 11 18:42 - 01:17  (06:34)\n\nwtmp begins Fri Dec 26 23:42:18 2025",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "failed_logins": {
+                "command": "lastb -n 10",
+                "stdout": "",
+                "stderr": "lastb: cannot open /var/log/btmp: Permission denied",
+                "exit_code": 1
+              },
+              "open_ports": {
+                "command": "ss -tuln",
+                "stdout": "Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess\nudp   UNCONN 0      0         127.0.0.54:53         0.0.0.0:*          \nudp   UNCONN 0      0      127.0.0.53%lo:53         0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:80         0.0.0.0:*          \ntcp   LISTEN 0      4096       127.0.0.1:6379       0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:22         0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:443        0.0.0.0:*          \ntcp   LISTEN 0      511        127.0.0.1:40139      0.0.0.0:*          \ntcp   LISTEN 0      4096       127.0.0.1:46467      0.0.0.0:*          \ntcp   LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*          \ntcp   LISTEN 0      511        127.0.0.1:38833      0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:8005       0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:8000       0.0.0.0:*          \ntcp   LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*          \ntcp   LISTEN 0      2048       127.0.0.1:8011       0.0.0.0:*          \ntcp   LISTEN 0      2048       127.0.0.1:8001       0.0.0.0:*          \ntcp   LISTEN 0      128        127.0.0.1:6010       0.0.0.0:*          \ntcp   LISTEN 0      4096            [::]:80            [::]:*          \ntcp   LISTEN 0      4096            [::]:22            [::]:*          \ntcp   LISTEN 0      4096            [::]:443           [::]:*          \ntcp   LISTEN 0      128            [::1]:6010          [::]:*          \ntcp   LISTEN 0      4096            [::]:8005          [::]:*          \ntcp   LISTEN 0      4096            [::]:8000          [::]:*",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "firewall_status": {
+                "command": "ufw status",
+                "stdout": "",
+                "stderr": "ERROR: You need to be root to run this script",
+                "exit_code": 1
+              },
+              "ssh_logs": {
+                "command": "journalctl -u ssh.service -n 30 --no-pager",
+                "stdout": "-- No entries --",
+                "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                "exit_code": 0
+              },
+              "sudo_activity": {
+                "command": "journalctl _COMM=sudo -n 30 --no-pager",
+                "stdout": "-- No entries --",
+                "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                "exit_code": 0
+              },
+              "ssh_config_audit": {
+                "command": "sshd -T",
+                "stdout": "",
+                "stderr": "/etc/ssh/sshd_config.d/50-cloud-init.conf: Permission denied",
+                "exit_code": 1
+              },
+              "cron_security": {
+                "service": {
+                  "command": "systemctl status cron.service --no-pager",
+                  "stdout": "● cron.service - Regular background program processing daemon\n     Loaded: loaded (/usr/lib/systemd/system/cron.service; enabled; preset: enabled)\n     Active: active (running) since Wed 2026-03-04 14:42:35 UTC; 2 weeks 0 days ago\n       Docs: man:cron(8)\n   Main PID: 750 (cron)\n      Tasks: 1 (limit: 4655)\n     Memory: 171.6M (peak: 452.6M)\n        CPU: 3min 22.953s\n     CGroup: /system.slice/cron.service\n             └─750 /usr/sbin/cron -f -P\n\nWarning: some journal files were not opened due to insufficient permissions.",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "system_crontab": {
+                  "command": "sed -n 1,120p /etc/crontab",
+                  "stdout": "# /etc/crontab: system-wide crontab\n# Unlike any other crontab you don't have to run the `crontab'\n# command to install the new version when you edit this file\n# and files in /etc/cron.d. These files also have username fields,\n# that none of the other crontabs do.\n\nSHELL=/bin/sh\n# You can also override PATH, but by default, newer versions inherit it from the environment\n#PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n\n# Example of job definition:\n# .---------------- minute (0 - 59)\n# |  .------------- hour (0 - 23)\n# |  |  .---------- day of month (1 - 31)\n# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...\n# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat\n# |  |  |  |  |\n# *  *  *  *  * user-name command to be executed\n17 *\t* * *\troot\tcd / && run-parts --report /etc/cron.hourly\n25 6\t* * *\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.daily; }\n47 6\t* * 7\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.weekly; }\n52 6\t1 * *\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.monthly; }\n#",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "cron_d": {
+                  "command": "ls -la /etc/cron.d",
+                  "stdout": "total 24\ndrwxr-xr-x   2 root root 4096 Mar  4 15:02 .\ndrwxr-xr-x 114 root root 4096 Mar 17 06:23 ..\n-rw-r--r--   1 root root  102 Mar 31  2024 .placeholder\n-rw-r--r--   1 root root  802 Apr 16  2023 certbot\n-rw-r--r--   1 root root  201 Apr  8  2024 e2scrub_all\n-rw-r--r--   1 root root  396 Jan  9  2024 sysstat",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "world_writable_files": {
+                "command": "find /tmp /var/tmp /var/www /home -xdev -type f -perm -0002",
+                "stdout": "",
+                "stderr": "find: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-XQoaek’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-7A0FEi’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-Li8837’: Permission denied\nfind: ‘/tmp/snap-private-tmp’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-XNUR0W’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-fuAPL6’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-zeAZI8’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-eKnvWP’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-HVrK5B’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-BuwDeZ’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-yqgigv’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-2BgD6t’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-7Aj14W’: Permission denied\nfind: ‘/home/appmaster’: Permission denied\nfind: ‘/home/aimaster’: Permission denied\nfind: ‘/home/reactmaster’: Permission denied\nfind: ‘/home/agenticaipure’: Permission denied\nfind: ‘/home/aiagent’: Permission denied\nfind: ‘/home/agenticai’: Permission denied",
+                "exit_code": 1
+              },
+              "user_account_audit": {
+                "passwd": {
+                  "command": "getent passwd",
+                  "stdout": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\ngames:x:5:60:games:/usr/games:/usr/sbin/nologin\nman:x:6:12:man:/var/cache/man:/usr/sbin/nologin\nlp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\nmail:x:8:8:mail:/var/mail:/usr/sbin/nologin\nnews:x:9:9:news:/var/spool/news:/usr/sbin/nologin\nuucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin\nproxy:x:13:13:proxy:/bin:/usr/sbin/nologin\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin\nbackup:x:34:34:backup:/var/backups:/usr/sbin/nologin\nlist:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin\nirc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin\n_apt:x:42:65534::/nonexistent:/usr/sbin/nologin\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\nsystemd-network:x:998:998:systemd Network Management:/:/usr/sbin/nologin\nsystemd-timesync:x:996:996:systemd Time Synchronization:/:/usr/sbin/nologin\ndhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false\nmessagebus:x:101:101::/nonexistent:/usr/sbin/nologin\nsyslog:x:102:102::/nonexistent:/usr/sbin/nologin\nsystemd-resolve:x:991:991:systemd Resolver:/:/usr/sbin/nologin\nuuidd:x:103:103::/run/uuidd:/usr/sbin/nologin\ntss:x:104:104:TPM software stack,,,:/var/lib/tpm:/bin/false\nsshd:x:105:65534::/run/sshd:/usr/sbin/nologin\npollinate:x:106:1::/var/cache/pollinate:/bin/false\ntcpdump:x:107:108::/nonexistent:/usr/sbin/nologin\nlandscape:x:108:109::/var/lib/landscape:/usr/sbin/nologin\nfwupd-refresh:x:990:990:Firmware update daemon:/var/lib/fwupd:/usr/sbin/nologin\npolkitd:x:989:989:User for polkitd:/:/usr/sbin/nologin\ndo-agent:x:999:988::/home/do-agent:/bin/false\nappmaster:x:1000:1000:appmaster,,,:/home/appmaster:/bin/bash\ndnsmasq:x:997:65534:dnsmasq:/var/lib/misc:/usr/sbin/nologin\nreactmaster:x:1001:1001:,,,:/home/reactmaster:/bin/bash\naimaster:x:1002:1002:,,,:/home/aimaster:/bin/bash\nagenticai:x:1003:1003:,,,:/home/agenticai:/bin/bash\naiagent:x:1004:1004:,,,:/home/aiagent:/bin/bash\nagenticaipure:x:1005:1005:,,,:/home/agenticaipure:/bin/bash\naiagentmulti:x:1006:1006:,,,:/home/aiagentmulti:/bin/bash",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "sudo_group": {
+                  "command": "getent group sudo",
+                  "stdout": "sudo:x:27:appmaster,reactmaster,aimaster,agenticai,aiagent,agenticaipure,aiagentmulti",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "root_group": {
+                  "command": "getent group root",
+                  "stdout": "root:x:0:",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "fail2ban_status": {
+                "service": {
+                  "command": "systemctl status fail2ban.service --no-pager",
+                  "stdout": "",
+                  "stderr": "Unit fail2ban.service could not be found.",
+                  "exit_code": 4
+                },
+                "client": {
+                  "command": "fail2ban-client status",
+                  "stdout": "",
+                  "stderr": "[Errno 2] No such file or directory: 'fail2ban-client'",
+                  "exit_code": 127
+                }
+              },
+              "docker_security": {
+                "containers": {
+                  "command": "docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}'",
+                  "stdout": "",
+                  "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+                  "exit_code": 1
+                },
+                "security_options": {
+                  "command": "docker info --format '{{json .SecurityOptions}}'",
+                  "stdout": "null",
+                  "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/info\": dial unix /var/run/docker.sock: connect: permission denied",
+                  "exit_code": 1
+                },
+                "daemon_socket": {
+                  "command": "ls -l /var/run/docker.sock",
+                  "stdout": "srw-rw---- 1 root docker 0 Mar  4 14:42 /var/run/docker.sock",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              }
+            },
+            "details": {
+              "active_sessions": {
+                "command": "who",
+                "stdout": "root     pts/0        2026-03-18 15:30 (185.43.231.253)",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "recent_logins": {
+                "command": "last -n 10",
+                "stdout": "root     pts/0        185.43.231.253   Wed Mar 18 15:30   still logged in\nroot     pts/0        185.43.231.253   Tue Mar 17 21:19 - 23:44  (02:25)\nroot     pts/0        185.43.231.253   Mon Mar 16 15:33 - 01:27  (09:54)\nroot     pts/3        185.43.229.238   Sat Mar 14 23:23 - 02:47  (03:24)\nroot     pts/2        185.43.229.238   Sat Mar 14 23:20 - 01:34  (02:13)\nroot     pts/1        185.43.229.238   Sat Mar 14 21:47 - 00:29  (02:42)\nroot     pts/0        185.43.231.253   Sat Mar 14 15:47 - 23:35  (07:47)\nroot     pts/0        185.43.231.253   Fri Mar 13 21:15 - 01:18  (04:02)\nroot     pts/0        185.43.231.253   Thu Mar 12 21:31 - 01:50  (04:19)\nroot     pts/0        185.43.231.253   Wed Mar 11 18:42 - 01:17  (06:34)\n\nwtmp begins Fri Dec 26 23:42:18 2025",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "failed_logins": {
+                "command": "lastb -n 10",
+                "stdout": "",
+                "stderr": "lastb: cannot open /var/log/btmp: Permission denied",
+                "exit_code": 1
+              },
+              "open_ports": {
+                "command": "ss -tuln",
+                "stdout": "Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess\nudp   UNCONN 0      0         127.0.0.54:53         0.0.0.0:*          \nudp   UNCONN 0      0      127.0.0.53%lo:53         0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:80         0.0.0.0:*          \ntcp   LISTEN 0      4096       127.0.0.1:6379       0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:22         0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:443        0.0.0.0:*          \ntcp   LISTEN 0      511        127.0.0.1:40139      0.0.0.0:*          \ntcp   LISTEN 0      4096       127.0.0.1:46467      0.0.0.0:*          \ntcp   LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*          \ntcp   LISTEN 0      511        127.0.0.1:38833      0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:8005       0.0.0.0:*          \ntcp   LISTEN 0      4096         0.0.0.0:8000       0.0.0.0:*          \ntcp   LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*          \ntcp   LISTEN 0      2048       127.0.0.1:8011       0.0.0.0:*          \ntcp   LISTEN 0      2048       127.0.0.1:8001       0.0.0.0:*          \ntcp   LISTEN 0      128        127.0.0.1:6010       0.0.0.0:*          \ntcp   LISTEN 0      4096            [::]:80            [::]:*          \ntcp   LISTEN 0      4096            [::]:22            [::]:*          \ntcp   LISTEN 0      4096            [::]:443           [::]:*          \ntcp   LISTEN 0      128            [::1]:6010          [::]:*          \ntcp   LISTEN 0      4096            [::]:8005          [::]:*          \ntcp   LISTEN 0      4096            [::]:8000          [::]:*",
+                "stderr": "",
+                "exit_code": 0
+              },
+              "firewall_status": {
+                "command": "ufw status",
+                "stdout": "",
+                "stderr": "ERROR: You need to be root to run this script",
+                "exit_code": 1
+              },
+              "ssh_logs": {
+                "command": "journalctl -u ssh.service -n 30 --no-pager",
+                "stdout": "-- No entries --",
+                "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                "exit_code": 0
+              },
+              "sudo_activity": {
+                "command": "journalctl _COMM=sudo -n 30 --no-pager",
+                "stdout": "-- No entries --",
+                "stderr": "Hint: You are currently not seeing messages from other users and the system.\n      Users in groups 'adm', 'systemd-journal' can see all messages.\n      Pass -q to turn off this notice.",
+                "exit_code": 0
+              },
+              "ssh_config_audit": {
+                "command": "sshd -T",
+                "stdout": "",
+                "stderr": "/etc/ssh/sshd_config.d/50-cloud-init.conf: Permission denied",
+                "exit_code": 1
+              },
+              "cron_security": {
+                "service": {
+                  "command": "systemctl status cron.service --no-pager",
+                  "stdout": "● cron.service - Regular background program processing daemon\n     Loaded: loaded (/usr/lib/systemd/system/cron.service; enabled; preset: enabled)\n     Active: active (running) since Wed 2026-03-04 14:42:35 UTC; 2 weeks 0 days ago\n       Docs: man:cron(8)\n   Main PID: 750 (cron)\n      Tasks: 1 (limit: 4655)\n     Memory: 171.6M (peak: 452.6M)\n        CPU: 3min 22.953s\n     CGroup: /system.slice/cron.service\n             └─750 /usr/sbin/cron -f -P\n\nWarning: some journal files were not opened due to insufficient permissions.",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "system_crontab": {
+                  "command": "sed -n 1,120p /etc/crontab",
+                  "stdout": "# /etc/crontab: system-wide crontab\n# Unlike any other crontab you don't have to run the `crontab'\n# command to install the new version when you edit this file\n# and files in /etc/cron.d. These files also have username fields,\n# that none of the other crontabs do.\n\nSHELL=/bin/sh\n# You can also override PATH, but by default, newer versions inherit it from the environment\n#PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n\n# Example of job definition:\n# .---------------- minute (0 - 59)\n# |  .------------- hour (0 - 23)\n# |  |  .---------- day of month (1 - 31)\n# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...\n# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat\n# |  |  |  |  |\n# *  *  *  *  * user-name command to be executed\n17 *\t* * *\troot\tcd / && run-parts --report /etc/cron.hourly\n25 6\t* * *\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.daily; }\n47 6\t* * 7\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.weekly; }\n52 6\t1 * *\troot\ttest -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.monthly; }\n#",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "cron_d": {
+                  "command": "ls -la /etc/cron.d",
+                  "stdout": "total 24\ndrwxr-xr-x   2 root root 4096 Mar  4 15:02 .\ndrwxr-xr-x 114 root root 4096 Mar 17 06:23 ..\n-rw-r--r--   1 root root  102 Mar 31  2024 .placeholder\n-rw-r--r--   1 root root  802 Apr 16  2023 certbot\n-rw-r--r--   1 root root  201 Apr  8  2024 e2scrub_all\n-rw-r--r--   1 root root  396 Jan  9  2024 sysstat",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "world_writable_files": {
+                "command": "find /tmp /var/tmp /var/www /home -xdev -type f -perm -0002",
+                "stdout": "",
+                "stderr": "find: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-XQoaek’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-7A0FEi’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-Li8837’: Permission denied\nfind: ‘/tmp/snap-private-tmp’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-XNUR0W’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-fuAPL6’: Permission denied\nfind: ‘/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-zeAZI8’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-logind.service-eKnvWP’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-timesyncd.service-HVrK5B’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-systemd-resolved.service-BuwDeZ’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-do-agent.service-yqgigv’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-ModemManager.service-2BgD6t’: Permission denied\nfind: ‘/var/tmp/systemd-private-d13005d31fac4fe8a4e89148334b0223-polkit.service-7Aj14W’: Permission denied\nfind: ‘/home/appmaster’: Permission denied\nfind: ‘/home/aimaster’: Permission denied\nfind: ‘/home/reactmaster’: Permission denied\nfind: ‘/home/agenticaipure’: Permission denied\nfind: ‘/home/aiagent’: Permission denied\nfind: ‘/home/agenticai’: Permission denied",
+                "exit_code": 1
+              },
+              "user_account_audit": {
+                "passwd": {
+                  "command": "getent passwd",
+                  "stdout": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\ngames:x:5:60:games:/usr/games:/usr/sbin/nologin\nman:x:6:12:man:/var/cache/man:/usr/sbin/nologin\nlp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\nmail:x:8:8:mail:/var/mail:/usr/sbin/nologin\nnews:x:9:9:news:/var/spool/news:/usr/sbin/nologin\nuucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin\nproxy:x:13:13:proxy:/bin:/usr/sbin/nologin\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin\nbackup:x:34:34:backup:/var/backups:/usr/sbin/nologin\nlist:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin\nirc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin\n_apt:x:42:65534::/nonexistent:/usr/sbin/nologin\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\nsystemd-network:x:998:998:systemd Network Management:/:/usr/sbin/nologin\nsystemd-timesync:x:996:996:systemd Time Synchronization:/:/usr/sbin/nologin\ndhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false\nmessagebus:x:101:101::/nonexistent:/usr/sbin/nologin\nsyslog:x:102:102::/nonexistent:/usr/sbin/nologin\nsystemd-resolve:x:991:991:systemd Resolver:/:/usr/sbin/nologin\nuuidd:x:103:103::/run/uuidd:/usr/sbin/nologin\ntss:x:104:104:TPM software stack,,,:/var/lib/tpm:/bin/false\nsshd:x:105:65534::/run/sshd:/usr/sbin/nologin\npollinate:x:106:1::/var/cache/pollinate:/bin/false\ntcpdump:x:107:108::/nonexistent:/usr/sbin/nologin\nlandscape:x:108:109::/var/lib/landscape:/usr/sbin/nologin\nfwupd-refresh:x:990:990:Firmware update daemon:/var/lib/fwupd:/usr/sbin/nologin\npolkitd:x:989:989:User for polkitd:/:/usr/sbin/nologin\ndo-agent:x:999:988::/home/do-agent:/bin/false\nappmaster:x:1000:1000:appmaster,,,:/home/appmaster:/bin/bash\ndnsmasq:x:997:65534:dnsmasq:/var/lib/misc:/usr/sbin/nologin\nreactmaster:x:1001:1001:,,,:/home/reactmaster:/bin/bash\naimaster:x:1002:1002:,,,:/home/aimaster:/bin/bash\nagenticai:x:1003:1003:,,,:/home/agenticai:/bin/bash\naiagent:x:1004:1004:,,,:/home/aiagent:/bin/bash\nagenticaipure:x:1005:1005:,,,:/home/agenticaipure:/bin/bash\naiagentmulti:x:1006:1006:,,,:/home/aiagentmulti:/bin/bash",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "sudo_group": {
+                  "command": "getent group sudo",
+                  "stdout": "sudo:x:27:appmaster,reactmaster,aimaster,agenticai,aiagent,agenticaipure,aiagentmulti",
+                  "stderr": "",
+                  "exit_code": 0
+                },
+                "root_group": {
+                  "command": "getent group root",
+                  "stdout": "root:x:0:",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              },
+              "fail2ban_status": {
+                "service": {
+                  "command": "systemctl status fail2ban.service --no-pager",
+                  "stdout": "",
+                  "stderr": "Unit fail2ban.service could not be found.",
+                  "exit_code": 4
+                },
+                "client": {
+                  "command": "fail2ban-client status",
+                  "stdout": "",
+                  "stderr": "[Errno 2] No such file or directory: 'fail2ban-client'",
+                  "exit_code": 127
+                }
+              },
+              "docker_security": {
+                "containers": {
+                  "command": "docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}'",
+                  "stdout": "",
+                  "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/containers/json\": dial unix /var/run/docker.sock: connect: permission denied",
+                  "exit_code": 1
+                },
+                "security_options": {
+                  "command": "docker info --format '{{json .SecurityOptions}}'",
+                  "stdout": "null",
+                  "stderr": "permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.50/info\": dial unix /var/run/docker.sock: connect: permission denied",
+                  "exit_code": 1
+                },
+                "daemon_socket": {
+                  "command": "ls -l /var/run/docker.sock",
+                  "stdout": "srw-rw---- 1 root docker 0 Mar  4 14:42 /var/run/docker.sock",
+                  "stderr": "",
+                  "exit_code": 0
+                }
+              }
+            },
+            "message": "Security Report\n\n1. Security summary\nThe system is actively accessed via root accounts from two external IP addresses. Several services listen on all interfaces, including SSH (port 22), HTTP (port 80), and HTTPS (port 443). Root login sessions are frequent and persistent. No records for failed login attempts could be accessed due to permissions. The firewall status could not be verified (requires root). No active Fail2ban service detected. Docker daemon access is restricted, limiting container and security option visibility. Cron service is active and configured with standard system jobs. Key files and directories show no apparent world-writable regular files in scanned locations, though permission denied errors prevent a full assessment. User accounts with shell access and sudo privileges are numerous.\n\n2. Risk level\nMedium\n\n3. Notable findings\n- Root user logins sourced from two external IPs (185.43.231.253 and 185.43.229.238) and sessions have been long-lived.\n- SSH service logs are inaccessible under current permission, preventing review of authentication events.\n- Failed login attempts cannot be audited due to lack of permission on /var/log/btmp.\n- Firewall status not available, preventing assessment of network filtering posture.\n- No Fail2ban service found, which could reduce automated blocking of brute force attacks.\n- Multiple users (seven) have sudo privileges, potentially increasing risk of privilege misuse.\n- Several services exposed on all network interfaces on ports 22, 80, 443, 8000, and 8005 without confirmation of their secure configuration.\n- Docker command denied due to permission issues; unable to audit containers or docker security options.\n- World-writable files scan incomplete due to permission denied on many directories and user home folders.\n\n4. Recommended low-risk actions\n- Request elevated permissions or root access to review failed login attempts via `lastb` and access SSH logs (`journalctl -u ssh.service`).\n- Run `sudo ufw status` or equivalent firewall commands as root to assess firewall configuration.\n- Review SSH daemon config under root to ensure best practices (disallow root login if possible, use key-based auth).\n- Review sudoers files and restrict sudo privileges to needed users only.\n- Confirm the services listening on additional ports (8000, 8005, etc.) are secured and up-to-date.\n- Confirm Docker group membership and security further by accessing docker commands with proper permissions.\n- Conduct a full world-writable files scan from root to identify any security risks.\n- Consider installing and enabling Fail2ban or similar intrusion prevention tools.\n\n5. Items that need manual review\n- The legitimacy of the root login IP addresses and whether such direct root logins are justified.\n- The security posture of exposed services, notably web servers and Redis on localhost.\n- The sudo privileges assigned to multiple users — confirm necessity and review audit logs.\n- Docker daemon socket permissions and usage to prevent unauthorized container control.\n- Cron jobs content review for any suspicious or unexpected scheduled tasks.\n- Potential risk from the lack of visible firewall status and active intrusion prevention.\n- Verification of possible sensitive data exposure due to inability to scan some directories and files caused by permission limitations.\n\nSummary: The current setup shows active root sessions and multiple open external network services without full visibility of log and firewall records due to permission restrictions. Elevated access is recommended for comprehensive review and operational tightening of access controls, service exposure, and logging mechanisms to reduce risk exposure."
+          },
+          "known_command_or_permission_issues": {
+            "system_health": true,
+            "security_review": true
+          },
+          "available_low_risk_actions": {
+            "check_cron_security": {
+              "action_name": "check_cron_security",
+              "description": "Review cron jobs and scheduled tasks."
+            },
+            "check_disk": {
+              "action_name": "check_disk",
+              "description": "Re-check root filesystem usage before cleanup decisions."
+            },
+            "check_disk_io": {
+              "action_name": "check_disk_io",
+              "description": "Inspect storage latency before changing workloads."
+            },
+            "check_docker_health": {
+              "action_name": "check_docker_health",
+              "description": "Review running containers and point-in-time Docker stats."
+            },
+            "check_docker_security": {
+              "action_name": "check_docker_security",
+              "description": "Inspect Docker security options and socket exposure."
+            },
+            "check_fail2ban_status": {
+              "action_name": "check_fail2ban_status",
+              "description": "Verify brute-force protection status."
+            },
+            "check_failed_services": {
+              "action_name": "check_failed_services",
+              "description": "List failed systemd services that may need recovery."
+            },
+            "check_firewall": {
+              "action_name": "check_firewall",
+              "description": "Verify host firewall policy and open access."
+            },
+            "check_log_rotation_health": {
+              "action_name": "check_log_rotation_health",
+              "description": "Confirm logrotate is healthy to avoid log growth."
+            },
+            "check_memory": {
+              "action_name": "check_memory",
+              "description": "Re-check memory pressure before changing processes."
+            },
+            "check_network_health": {
+              "action_name": "check_network_health",
+              "description": "Inspect interfaces and routes for network issues."
+            },
+            "check_open_ports": {
+              "action_name": "check_open_ports",
+              "description": "Review listening ports and exposed services."
+            },
+            "check_uptime": {
+              "action_name": "check_uptime",
+              "description": "Confirm load and uptime before deeper remediation."
+            },
+            "check_user_account_audit": {
+              "action_name": "check_user_account_audit",
+              "description": "Review local users and privileged group membership."
+            },
+            "check_world_writable_files": {
+              "action_name": "check_world_writable_files",
+              "description": "Inspect risky file permissions in common paths."
+            },
+            "inspect_root_sizes": {
+              "action_name": "inspect_root_sizes",
+              "description": "Locate large directories under root."
+            },
+            "inspect_var_log_sizes": {
+              "action_name": "inspect_var_log_sizes",
+              "description": "Locate large logs and log directories."
+            },
+            "list_active_sessions": {
+              "action_name": "list_active_sessions",
+              "description": "Review current interactive sessions."
+            },
+            "list_failed_logins": {
+              "action_name": "list_failed_logins",
+              "description": "Review recent failed authentication attempts."
+            },
+            "list_recent_logins": {
+              "action_name": "list_recent_logins",
+              "description": "Review recent successful authentication history."
+            },
+            "read_kernel_errors": {
+              "action_name": "read_kernel_errors",
+              "description": "Check recent kernel-level error messages."
+            },
+            "read_nginx_logs": {
+              "action_name": "read_nginx_logs",
+              "description": "Inspect recent nginx service logs."
+            },
+            "read_ssh_config_audit": {
+              "action_name": "read_ssh_config_audit",
+              "description": "Review effective SSH daemon configuration."
+            },
+            "read_ssh_logs": {
+              "action_name": "read_ssh_logs",
+              "description": "Inspect recent SSH service logs."
+            },
+            "read_sudo_activity": {
+              "action_name": "read_sudo_activity",
+              "description": "Review recent sudo command activity."
+            },
+            "read_system_logs": {
+              "action_name": "read_system_logs",
+              "description": "Inspect recent general system journal entries."
+            },
+            "status_service": {
+              "action_name": "status_service",
+              "description": "Check one monitored service status explicitly."
+            }
+          },
+          "priority_signals": [
+            {
+              "source": "system_health",
+              "priority": "high",
+              "signal": "Root filesystem pressure detected."
+            },
+            {
+              "source": "system_health",
+              "priority": "medium",
+              "signal": "nginx may be inactive or not serving traffic."
+            },
+            {
+              "source": "security_review",
+              "priority": "high",
+              "signal": "Remote root access should be validated."
+            },
+            {
+              "source": "security_review",
+              "priority": "medium",
+              "signal": "Host brute-force protection status needs review."
+            }
+          ]
+        },
+        "message": "Overall remediation strategy\n----------------------------\nFocus first on critical capacity and security risks to maintain system stability and prevent service disruption. Address root filesystem disk space pressure quickly, validate and correct NGINX service status to ensure web service availability, and verify the security posture of remote root access and exposed services. Resolve permission limitations to increase visibility into logs and container states, enabling ongoing monitoring and control.\n\nImmediate actions\n-----------------\n1. **Recheck root filesystem usage and identify candidates for cleanup:**\n   - Run disk usage inspections on large directories under root and /var/log with elevated privileges.\n   - Identify large or obsolete files (e.g., old logs, cache files) that can be safely removed or rotated.\n2. **Investigate remote root sessions actively logged in:**\n   - Review current active root sessions and recent login history from remote IPs.\n   - Validate if these root accesses are authorized and expected.\n3. **Review SSH daemon configuration and logs with root permissions:**\n   - Gain root access or use sudo to read SSH service logs and SSH daemon config.\n   - Check for settings allowing remote root login and consider disabling if possible.\n4. **Check Docker group membership and permissions for monitoring container status:**\n   - Confirm user access to docker.sock to restore container listing and stats.\n   - Temporarily escalate permissions as needed to regain control and audit Docker containers.\n\nMaintenance-window actions\n---------------------------\n1. **Enable and start NGINX service if web service is required:**\n   - Investigate why NGINX is inactive (disabled but preset-enabled).\n   - Test configuration and logs under elevated privileges to identify errors.\n   - Enable and start the service during a maintenance window after verification.\n2. **Assess root filesystem disk size planning:**\n   - Consider expanding disk size or adding additional storage.\n   - Plan for long-term log management to reduce /var/log growth (currently 2.5 GB total with 2.1 GB in journal).\n3. **Review and configure host firewall with root privileges:**\n   - Run firewall status and configuration commands as root.\n   - Apply or adjust firewall policies to restrict exposed services, especially SSH and other external ports.\n4. **Implement and configure Fail2ban or equivalent:**\n   - Install and enable brute-force protection service.\n   - Configure jail rules for SSH and other exposed services.\n5. **Audit sudo group membership and reduce privileged users:**\n   - Review necessity of current 7 sudo users.\n   - Tighten sudo privileges to minimize risk of privilege misuse.\n\nLow-risk verification steps\n---------------------------\n- Use available non-privileged commands to check:\n  - Disk IO and memory status (to confirm stable system usage).\n  - Network interfaces, routes and open ports to verify service exposure.\n  - Review cron jobs for suspicious or unauthorized scheduled tasks.\n  - Inspect current active sessions and recent successful login records.\n  - Scan for world-writable files in accessible paths.\n  - Verify logrotate status and timer for ongoing log maintenance.\n- After adjusting Docker permissions, run `docker ps` and `docker info` to verify container health and security options.\n- Inspect general system journal logs for any alerts.\n\nItems requiring manual approval\n-------------------------------\n- Confirmation to clean or delete large files on root filesystem, especially logs or cache data.\n- Approval to enable and start the NGINX service or alternative web services.\n- Authorization to review remote root access legitimacy and decide on access restrictions or user lockout.\n- Approval to change SSH daemon settings that affect remote root login and authentication methods.\n- Decision on increasing disk space capacity or repartitioning root filesystem.\n- Policy decision on firewall rules to implement or modify open ports.\n- Authorization for adding or removing users from the sudo group.\n- Approval for installing and enabling intrusion prevention tools like Fail2ban.\n- Review and approval of cron jobs and scheduled tasks for compliance and security.\n\nSummary\n-------\nPerform immediate root filesystem rechecks and root access validation. Gain elevated permissions to diagnose permission-denied issues, especially for logs, Docker, and SSH configuration. Plan NGINX restart and service enablement in a maintenance window after fixation of any configuration issues. Harden security by reviewing and restricting remote root logins and sudo group membership. Implement firewall and intrusion prevention measures systematically."
+      }
+    }
+  },
+  "safe_actions": [
+    "check_cron_security",
+    "check_disk",
+    "check_disk_io",
+    "check_docker_health",
+    "check_docker_security",
+    "check_fail2ban_status",
+    "check_failed_services",
+    "check_firewall",
+    "check_log_rotation_health",
+    "check_memory",
+    "check_network_health",
+    "check_open_ports",
+    "check_uptime",
+    "check_user_account_audit",
+    "check_world_writable_files",
+    "inspect_root_sizes",
+    "inspect_var_log_sizes",
+    "list_active_sessions",
+    "list_failed_logins",
+    "list_recent_logins",
+    "read_kernel_errors",
+    "read_nginx_logs",
+    "read_ssh_config_audit",
+    "read_ssh_logs",
+    "read_sudo_activity",
+    "read_system_logs",
+    "status_service"
+  ]
+}
