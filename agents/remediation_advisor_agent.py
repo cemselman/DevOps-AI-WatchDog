@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import json
 
-from agents.report import AgentReport
 from services.llm_client import LLMClient
+from shared.agent_report import AgentReport
 from tools.remediation.remediation_tools import build_remediation_context
 
 

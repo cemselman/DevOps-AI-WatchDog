@@ -6,14 +6,16 @@ from importlib import import_module
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
+    from shared.agent_report import AgentReport
     from shared.config import AppConfig
 
-__all__ = ["AppConfig", "load_config"]
+__all__ = ["AgentReport", "AppConfig", "load_config"]
 
 
 def __getattr__(name: str) -> Any:
     """Lazy-load shared exports to keep package imports lightweight."""
     export_map = {
+        "AgentReport": ("shared.agent_report", "AgentReport"),
         "AppConfig": ("shared.config", "AppConfig"),
         "load_config": ("shared.config", "load_config"),
     }

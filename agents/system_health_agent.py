@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import json
 
-from agents.report import AgentReport
 from services.llm_client import LLMClient
+from shared.agent_report import AgentReport
 from shared.config import AppConfig
 from tools.system_health.system_health_tools import collect_all_health_data
 

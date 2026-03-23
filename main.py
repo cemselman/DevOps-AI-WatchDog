@@ -7,11 +7,11 @@ import logging
 from datetime import UTC, datetime
 from pathlib import Path
 
-from agents.report import AgentReport
 from agents.remediation_advisor_agent import RemediationAdvisorAgent
 from agents.security_agent import SecurityReviewAgent
 from agents.system_health_agent import SystemHealthAgent
 from services.llm_client import LLMClient
+from shared.agent_report import AgentReport
 from shared.config import load_config
 from tools.command_utils import configure_timeout
 from tools.security.security_allowlisted_actions import SecurityActionExecutor

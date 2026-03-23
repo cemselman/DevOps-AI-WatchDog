@@ -63,7 +63,7 @@ class TestAgentReport(unittest.TestCase):
     """Verify the typed report dataclass."""
 
     def test_to_dict_roundtrip(self) -> None:
-        from agents.report import AgentReport
+        from shared.agent_report import AgentReport
 
         report = AgentReport(
             role="test",
@@ -82,7 +82,7 @@ class TestRemediationTools(unittest.TestCase):
     """Verify remediation context building."""
 
     def test_build_remediation_context(self) -> None:
-        from agents.report import AgentReport
+        from shared.agent_report import AgentReport
         from tools.remediation.remediation_tools import build_remediation_context
 
         health_report = AgentReport(
@@ -115,7 +115,7 @@ class TestRemediationAgent(unittest.TestCase):
 
     def test_run_returns_agent_report(self) -> None:
         from agents.remediation_advisor_agent import RemediationAdvisorAgent
-        from agents.report import AgentReport
+        from shared.agent_report import AgentReport
 
         class FakeLLMClient:
             def ask(self, system_prompt: str, user_prompt: str) -> str:

@@ -7,9 +7,9 @@ from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from agents.remediation_advisor_agent import RemediationAdvisorAgent
-    from agents.report import AgentReport
     from agents.security_agent import SecurityReviewAgent
     from agents.system_health_agent import SystemHealthAgent
+    from shared.agent_report import AgentReport
 
 __all__ = ["AgentReport", "RemediationAdvisorAgent", "SecurityReviewAgent", "SystemHealthAgent"]
 
@@ -17,7 +17,7 @@ __all__ = ["AgentReport", "RemediationAdvisorAgent", "SecurityReviewAgent", "Sys
 def __getattr__(name: str) -> Any:
     """Lazy-load agent exports to avoid import-time dependency side effects."""
     export_map = {
-        "AgentReport": ("agents.report", "AgentReport"),
+        "AgentReport": ("shared.agent_report", "AgentReport"),
         "RemediationAdvisorAgent": (
             "agents.remediation_advisor_agent",
             "RemediationAdvisorAgent",

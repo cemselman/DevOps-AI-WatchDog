@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 
-from agents.report import AgentReport
+from shared.agent_report import AgentReport
 
 
 _ACTION_DESCRIPTIONS = {
