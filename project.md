@@ -32,8 +32,8 @@ When the system runs, it:
 ### Main components
 
 - `main.py`: orchestration layer
-- `config.py`: environment settings and runtime configuration
-- `llm_client.py`: shared OpenAI client wrapper
+- `shared/config.py`: environment settings and shared runtime configuration
+- `services/llm_client.py`: shared OpenAI client wrapper
 - `.env.example`: sample environment variable template
 - `agents/`: specialized agent modules
 - `tools/`: data collection and allowlisted action layer
@@ -44,6 +44,40 @@ When the system runs, it:
 The agents do not talk to each other directly. Each agent works in its own domain, and `main.py` orchestrates the full flow.
 
 `SystemHealthAgent` collects operational signals such as disk, services, nginx, Docker, kernel, network, and logrotate. `SecurityReviewAgent` focuses on sessions, SSH, sudo activity, cron, fail2ban, world-writable files, user auditing, and Docker security. `RemediationAdvisorAgent` reads the first two reports and turns them into a prioritized action plan.
+
+### Architecture diagram
+
+```mermaid
+flowchart TD
+    ENV[".env"] --> CFG["shared/config.py"]
+    CFG --> MAIN["main.py"]
+
+    MAIN --> HA["SystemHealthAgent"]
+    MAIN --> SA["SecurityReviewAgent"]
+    MAIN --> RA["RemediationAdvisorAgent"]
+
+    HA --> LLC["services/llm_client.py"]
+    SA --> LLC
+    RA --> LLC
+    LLC <--> LLM["LLM / OpenAI"]
+
+    HA --> HT["tools/system_health/system_health_tools.py"]
+    SA --> ST["tools/security/security_tools.py"]
+    RA --> RT["tools/remediation/remediation_tools.py"]
+
+    HT --> HAA["system_health_allowlisted_actions.py"]
+    ST --> SAA["security_allowlisted_actions.py"]
+
+    HAA --> OS["OS Linux"]
+    SAA --> OS
+
+    HA --> HR["Health Report"]
+    SA --> SR["Security Report"]
+    HR --> RT
+    SR --> RT
+
+    RA --> FR["Final Markdown / JSON Report"]
+```
 
 This design makes the system:
 
@@ -119,8 +153,8 @@ Sistem calistiginda:
 ### Temel Bilesenler
 
 - `main.py`: orkestrasyon katmani
-- `config.py`: ortam ayarlari ve konfigurasyon
-- `llm_client.py`: OpenAI istemci sarmalayicisi
+- `shared/config.py`: ortam ayarlari ve ortak konfigurasyon
+- `services/llm_client.py`: ortak OpenAI istemci sarmalayicisi
 - `.env.example`: ortam degiskenleri icin ornek sablon
 - `agents/`: uzman agent modulleri
 - `tools/`: veri toplama ve allowlisted aksiyon katmani
@@ -131,6 +165,40 @@ Sistem calistiginda:
 Bu projede agentlar birbiriyle konusmaz. Her agent kendi alaninda calisir ve `main.py` tum sureci yonetir.
 
 `SystemHealthAgent` tarafi disk, servis, nginx, Docker, kernel, network ve logrotate gibi operasyonel sinyalleri toplar. `SecurityReviewAgent` tarafi ise oturumlar, SSH, sudo activity, cron, fail2ban, world-writable dosyalar, kullanici denetimi ve Docker security gibi guvenlik sinyallerine bakar. `RemediationAdvisorAgent` ise ilk iki agentin ciktilarini okuyup onceliklendirilmis aksiyon plani uretir.
+
+### Mimari Diyagram
+
+```mermaid
+flowchart TD
+    ENV[".env"] --> CFG["shared/config.py"]
+    CFG --> MAIN["main.py"]
+
+    MAIN --> HA["SystemHealthAgent"]
+    MAIN --> SA["SecurityReviewAgent"]
+    MAIN --> RA["RemediationAdvisorAgent"]
+
+    HA --> LLC["services/llm_client.py"]
+    SA --> LLC
+    RA --> LLC
+    LLC <--> LLM["LLM / OpenAI"]
+
+    HA --> HT["tools/system_health/system_health_tools.py"]
+    SA --> ST["tools/security/security_tools.py"]
+    RA --> RT["tools/remediation/remediation_tools.py"]
+
+    HT --> HAA["system_health_allowlisted_actions.py"]
+    ST --> SAA["security_allowlisted_actions.py"]
+
+    HAA --> OS["OS Linux"]
+    SAA --> OS
+
+    HA --> HR["Health Report"]
+    SA --> SR["Security Report"]
+    HR --> RT
+    SR --> RT
+
+    RA --> FR["Final Markdown / JSON Report"]
+```
 
 Bu tercih:
 

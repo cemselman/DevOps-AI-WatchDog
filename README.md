@@ -1,4 +1,4 @@
-# DevOps Watchdog
+# DevOps AI Watchdog
 
 AI-powered multi-agent Linux server analysis for health, security, and remediation planning.
 
@@ -28,8 +28,10 @@ The project collects real host data through a controlled tool layer, sends struc
 ```text
 .
 ├── main.py
-├── config.py
-├── llm_client.py
+├── shared/
+│   └── config.py
+├── services/
+│   └── llm_client.py
 ├── .env.example
 ├── agents/
 ├── tools/
@@ -125,8 +127,10 @@ Proje, gercek sistem verisini kontrollu bir tool katmani uzerinden toplar, bu ve
 ```text
 .
 ├── main.py
-├── config.py
-├── llm_client.py
+├── shared/
+│   └── config.py
+├── services/
+│   └── llm_client.py
 ├── .env.example
 ├── agents/
 ├── tools/

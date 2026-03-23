@@ -171,6 +171,24 @@ This structure helps because:
 - remediation planning is handled in its own tool layer
 - automation safety boundaries are defined in code
 
+### Tool-layer diagram
+
+```mermaid
+flowchart TD
+    HA["SystemHealthAgent"] --> HT["tools/system_health/system_health_tools.py"]
+    SA["SecurityReviewAgent"] --> ST["tools/security/security_tools.py"]
+    RA["RemediationAdvisorAgent"] --> RT["tools/remediation/remediation_tools.py"]
+
+    HT --> HAA["system_health_allowlisted_actions.py"]
+    ST --> SAA["security_allowlisted_actions.py"]
+
+    HAA --> OS["OS Linux"]
+    SAA --> OS
+
+    HR["Health Report"] --> RT
+    SR["Security Report"] --> RT
+```
+
 ### Summary
 
 The `tools/` directory is the most critical integration and safety layer in the project. It collects the data that agents interpret, standardizes outputs, and keeps automation boundaries under control.
@@ -343,6 +361,24 @@ Bu yapi sayesinde:
 - sistem sagligi ve guvenlik rolleri tool seviyesinde de ayrilir
 - remediation planning de ayri bir tool katmani ile yonetilir
 - guvenli otomasyon sinirlari kod ile belirlenir
+
+### Tool Katmani Diyagrami
+
+```mermaid
+flowchart TD
+    HA["SystemHealthAgent"] --> HT["tools/system_health/system_health_tools.py"]
+    SA["SecurityReviewAgent"] --> ST["tools/security/security_tools.py"]
+    RA["RemediationAdvisorAgent"] --> RT["tools/remediation/remediation_tools.py"]
+
+    HT --> HAA["system_health_allowlisted_actions.py"]
+    ST --> SAA["security_allowlisted_actions.py"]
+
+    HAA --> OS["OS Linux"]
+    SAA --> OS
+
+    HR["Health Report"] --> RT
+    SR["Security Report"] --> RT
+```
 
 ### Ozet
 

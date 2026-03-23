@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 
 from agents.report import AgentReport
-from llm_client import LLMClient
+from services.llm_client import LLMClient
 from tools.remediation.remediation_tools import build_remediation_context
 
 

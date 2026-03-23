@@ -17,7 +17,7 @@ class TestConfig(unittest.TestCase):
 
     def test_load_config_returns_dataclass(self) -> None:
         os.environ.setdefault("OPENAI_API_KEY", "test-key")
-        from config import AppConfig, load_config
+        from shared.config import AppConfig, load_config
 
         cfg = load_config()
         self.assertIsInstance(cfg, AppConfig)
@@ -26,7 +26,7 @@ class TestConfig(unittest.TestCase):
 
     def test_default_timeout_is_positive(self) -> None:
         os.environ.setdefault("OPENAI_API_KEY", "test-key")
-        from config import load_config
+        from shared.config import load_config
 
         cfg = load_config()
         self.assertGreater(cfg.command_timeout_seconds, 0)

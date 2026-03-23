@@ -119,6 +119,28 @@ The overall flow is:
 
 The agents do not talk to each other directly. `main.py` orchestrates all three and combines their outputs.
 
+### Agent flow diagram
+
+```mermaid
+flowchart LR
+    MAIN["main.py"] --> HA["SystemHealthAgent"]
+    MAIN --> SA["SecurityReviewAgent"]
+    MAIN --> RA["RemediationAdvisorAgent"]
+
+    HA --> HREP["Health Report"]
+    SA --> SREP["Security Report"]
+
+    HREP --> RA
+    SREP --> RA
+
+    HA --> LLC["services/llm_client.py"]
+    SA --> LLC
+    RA --> LLC
+    LLC <--> LLM["LLM / OpenAI"]
+
+    RA --> FINAL["Final Markdown / JSON Report"]
+```
+
 ### Summary
 
 The agent design in this project follows a "specialized agents under a shared orchestrator" approach instead of "one agent does everything." With the third agent, the system now produces not only findings, but also an action plan.
@@ -239,6 +261,28 @@ Agentlar genel olarak su akisi izler:
 4. `main.py` tum ciktilari birlestirir
 
 Bu agentlar dogrudan birbirleriyle konusmaz. Ucunu de `main.py` calistirir ve ciktilari birlestirir.
+
+### Agent Akis Diyagrami
+
+```mermaid
+flowchart LR
+    MAIN["main.py"] --> HA["SystemHealthAgent"]
+    MAIN --> SA["SecurityReviewAgent"]
+    MAIN --> RA["RemediationAdvisorAgent"]
+
+    HA --> HREP["Health Report"]
+    SA --> SREP["Security Report"]
+
+    HREP --> RA
+    SREP --> RA
+
+    HA --> LLC["services/llm_client.py"]
+    SA --> LLC
+    RA --> LLC
+    LLC <--> LLM["LLM / OpenAI"]
+
+    RA --> FINAL["Final Markdown / JSON Report"]
+```
 
 ### Ozet
 
